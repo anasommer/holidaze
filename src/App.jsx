@@ -6,6 +6,7 @@ import Venue from './pages/venue/Venue';
 function App() {
   return (
     <BrowserRouter>
+      <h1 className='text-3xl font-bold underline bg-rose-400'>Hello world!</h1>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/venues' element={<List />} />
