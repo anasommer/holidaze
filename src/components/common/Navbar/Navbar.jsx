@@ -4,7 +4,7 @@ import useAuthStore from '../../../store/authStore';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isAuthorized } = useAuthStore();
+  const { isAuthorized, isVenueManager } = useAuthStore();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
@@ -50,23 +50,46 @@ const Navbar = () => {
                   d='M19 9l-7 7-7-7'
                 />
               </svg>
+              {/* Dropdown Menu */}
               {isDropdownOpen && (
-                <div className='absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-50'>
+                <div className='absolute right-0 mt-2 py-2 w-48 bg-gray-800 rounded-md shadow-xl z-50 '>
+                  <div className='border-t border-amber-200 my-1'></div>
+                  <div className='px-4 py-2 text-xs  bg-gray-800 text-amber-400 '>
+                    User Options:
+                  </div>
                   <Link
                     to='/profile'
-                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                    className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100'
                   >
                     Profile
                   </Link>
                   <Link
                     to='/bookings'
-                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                    className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100'
                   >
                     Bookings
                   </Link>
+
+                  {isVenueManager && (
+                    <>
+                      <div className='border-t border-amber-400 my-1'></div>
+                      <div className='px-4 py-2 text-xs bg-gray-800 text-amber-400'>
+                        Manager Options:
+                      </div>
+                      <Link
+                        to='/manage-venues'
+                        className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100'
+                      >
+                        Manage Venues
+                      </Link>
+                      {/* Additional venue manager links */}
+                    </>
+                  )}
+
+                  <div className='border-t border-amber-400 my-1 '></div>
                   <Link
                     to='/logout'
-                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-amber-500 hover:text-black'
+                    className='block px-4 py-2 text-sm hover:bg-red-400 hover:text-black text-neutral-100'
                   >
                     Logout
                   </Link>
