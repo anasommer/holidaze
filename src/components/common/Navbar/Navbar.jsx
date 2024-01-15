@@ -59,15 +59,15 @@ const Navbar = () => {
                   </div>
                   <Link
                     to='/profile'
-                    className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100'
+                    className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100 hover:bg-amber-300 hover:text-black'
                   >
                     Profile
                   </Link>
                   <Link
                     to='/bookings'
-                    className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100'
+                    className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100 hover:bg-amber-300 hover:text-black'
                   >
-                    Bookings
+                    Your Bookings
                   </Link>
 
                   {isVenueManager && (
@@ -78,7 +78,13 @@ const Navbar = () => {
                       </div>
                       <Link
                         to='/manage-venues'
-                        className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100'
+                        className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100 hover:bg-amber-300 hover:text-black'
+                      >
+                        Create Venue
+                      </Link>
+                      <Link
+                        to='/manage-venues'
+                        className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100 hover:bg-amber-300 hover:text-black'
                       >
                         Manage Venues
                       </Link>
