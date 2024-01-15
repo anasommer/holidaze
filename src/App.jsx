@@ -13,17 +13,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />
-          {isAuthorized && (
+          {isAuthorized ? (
             <>
               <Route path='/profile' element={<UserProfile />} />{' '}
             </>
-          )}
-
-          {/* Routes for all users */}
-          {!isAuthorized && (
-            <>
-              <Route path='/signup' element={<UserRegister />} />
-            </>
+          ) : (
+            //  Routes for all users
+            <Route path='/signup' element={<UserRegister />} />
           )}
         </Route>
       </Routes>
