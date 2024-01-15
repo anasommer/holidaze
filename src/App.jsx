@@ -1,17 +1,33 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/home/Home';
-import List from './pages/list/List';
-import Venue from './pages/venue/Venue';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage/HomePage';
+import Layout from './components/common/Layout';
+import UserProfile from './components/user/UserProfile/UserProfile';
+import useAuthStore from './store/authStore';
+import UserRegister from './components/user/UserRegister/UserRegister';
 
 function App() {
+  const { isAuthorized } = useAuthStore();
+
   return (
-    <BrowserRouter>
+    <>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/venues' element={<List />} />
-        <Route path='/venues/:id' element={<Venue />} />
+        <Route path='/' element={<Layout />}>
+          <Route index element={<HomePage />} />
+          {isAuthorized && (
+            <>
+              <Route path='/profile' element={<UserProfile />} />{' '}
+            </>
+          )}
+
+          {/* Routes for all users */}
+          {!isAuthorized && (
+            <>
+              <Route path='/signup' element={<UserRegister />} />
+            </>
+          )}
+        </Route>
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
