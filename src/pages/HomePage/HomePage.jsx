@@ -1,37 +1,13 @@
+import VenueList from '../../components/venues/VenueList';
+
 const HomePage = () => {
   return (
     <>
-      <div className='max-w-7xl m-auto'>
-        <h1 className='text-3xl font-bold underline text-center'>
-          Hello world!
-        </h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-          quam ad architecto quas odio quod exercitationem repellat, repudiandae
-          consequuntur quia inventore perspiciatis itaque aspernatur voluptatum
-          vel ipsam consectetur, sed distinctio. Quod, voluptate tenetur
-          exercitationem, reprehenderit atque ducimus cupiditate accusamus quas
-          aliquid aliquam vero optio expedita quasi repellat commodi quia
-          officiis illum sint minus. Recusandae debitis tempore eum aspernatur
-          nesciunt deserunt! Magni rem alias doloribus excepturi dolorum quia
-          laboriosam eum tempora hic nemo suscipit reiciendis numquam, obcaecati
-          ratione, consectetur in incidunt reprehenderit natus totam nobis omnis
-          sapiente veritatis consequuntur nihil. Ipsum.
-        </p>
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-          quam ad architecto quas odio quod exercitationem repellat, repudiandae
-          consequuntur quia inventore perspiciatis itaque aspernatur voluptatum
-          vel ipsam consectetur, sed distinctio. Quod, voluptate tenetur
-          exercitationem, reprehenderit atque ducimus cupiditate accusamus quas
-          aliquid aliquam vero optio expedita quasi repellat commodi quia
-          officiis illum sint minus. Recusandae debitis tempore eum aspernatur
-          nesciunt deserunt! Magni rem alias doloribus excepturi dolorum quia
-          laboriosam eum tempora hic nemo suscipit reiciendis numquam, obcaecati
-          ratione, consectetur in incidunt reprehenderit natus totam nobis omnis
-          sapiente veritatis consequuntur nihil. Ipsum.
-        </p>
+      <h1 className='text-center mt-10 '>Find a perfect getaway!</h1>
+      <div className='mt-10 mb-10 flex justify-center min-h-screen '>
+        <div className='w-full max-w-4xl px-2 sm:px-6 lg:px-8'>
+          <VenueList />
+        </div>
       </div>
     </>
   );
