@@ -13,10 +13,6 @@ const VenueList = () => {
     });
   }, [currentPage, fetchVenues]);
 
-  const filteredVenues = venues.filter((venue) =>
-    venue.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   const goToNextPage = () => {
     useVenuesStore.setState((prev) => ({ currentPage: prev.currentPage + 1 }));
   };
@@ -29,6 +25,10 @@ const VenueList = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading venues!</p>;
+
+  const filteredVenues = venues.filter((venue) =>
+    venue.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div>

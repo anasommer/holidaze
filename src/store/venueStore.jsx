@@ -6,7 +6,7 @@ const useVenuesStore = create((set, get) => ({
   loading: true,
   error: null,
   currentPage: 0,
-  limit: 15,
+  limit: 24,
   searchQuery: '',
   setSearchQuery: (query) => set({ searchQuery: query }),
   resetPagination: () => set({ currentPage: 0 }),
