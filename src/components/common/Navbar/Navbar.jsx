@@ -1,18 +1,28 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuthStore from '../../../store/authStore';
+import useVenuesStore from '../../../store/venueStore';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isAuthorized, isVenueManager } = useAuthStore();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const resetPagination = useVenuesStore((state) => state.resetPagination);
+
+  const handleLogoClick = () => {
+    resetPagination();
+  };
 
   return (
     <>
       <nav className='bg-gray-800 text-white font-mono'>
         <div className='mx-auto px-4 flex justify-between items-center h-16 max-w-screen-2xl py-9'>
           {/* Logo */}
-          <Link to='/' className='flex items-center py-2 px-2'>
+          <Link
+            onClick={handleLogoClick}
+            to='/'
+            className='flex items-center py-2 px-2'
+          >
             <span className='font-bold text-xl text-amber-400'>Holidaze</span>
           </Link>
 
