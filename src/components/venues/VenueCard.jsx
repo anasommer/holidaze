@@ -1,6 +1,6 @@
 const VenueCard = ({ venue }) => {
   return (
-    <div className='flex flex-col max-w-sm rounded overflow-hidden shadow-xl shadow-gray-400'>
+    <div className='flex flex-col max-w-sm rounded overflow-hidden shadow-xl shadow-gray-400 text-center'>
       {venue.media.length > 0 ? (
         <img
           className='w-full h-48 object-cover'
@@ -18,7 +18,12 @@ const VenueCard = ({ venue }) => {
       <div className='flex-grow p-4'>
         <div className='font-bold text-xl mb-2'>{venue.name}</div>
         <p className='text-gray-700 text-base h-24 overflow-hidden'>
-          {venue.description}
+          <span className='text-2xl font-bold tracking-tight text-red-600'>
+            ${venue.price}
+          </span>{' '}
+          <span className='text-sm font-semibold leading-6 tracking-wide text-gray-500'>
+            USD
+          </span>
         </p>
       </div>
       <div className='p-4'>

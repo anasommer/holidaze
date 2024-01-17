@@ -29,14 +29,12 @@ const VenueList = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading venues!</p>;
 
-  console.log(venues);
-
   return (
     <div>
       {/* Grid of venues */}
       <div
         ref={listRef}
-        className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
+        className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 '
       >
         {venues.map((venue) => (
           <VenueCard key={venue.id} venue={venue} />

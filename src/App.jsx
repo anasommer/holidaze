@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <div className='bg-zinc-50 text-gray-800 '>
+      <div className='bg-zinc-50 text-gray-800'>
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<HomePage />} />
