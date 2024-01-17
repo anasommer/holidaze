@@ -8,6 +8,7 @@ const Navbar = () => {
   const { isAuthorized, isVenueManager } = useAuthStore();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const resetPagination = useVenuesStore((state) => state.resetPagination);
+  const setSearchQuery = useVenuesStore((state) => state.setSearchQuery);
 
   const handleLogoClick = () => {
     resetPagination();
@@ -15,7 +16,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className='bg-gray-800 text-white font-mono'>
+      <nav className='bg-gray-800 text-white font-mono pb-2'>
         <div className='mx-auto px-4 flex justify-between items-center h-16 max-w-screen-2xl py-9'>
           {/* Logo */}
           <Link
@@ -32,6 +33,7 @@ const Navbar = () => {
               type='text'
               className='p-2 w-full rounded-lg text-black'
               placeholder='Search Venues'
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
 

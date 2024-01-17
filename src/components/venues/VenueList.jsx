@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useVenuesStore from '../../store/venueStore';
 import VenueCard from './VenueCard';
 
 const VenueList = () => {
-  const { venues, loading, error, fetchVenues, currentPage } = useVenuesStore();
+  const { venues, loading, error, fetchVenues, currentPage, searchQuery } =
+    useVenuesStore();
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -12,9 +13,9 @@ const VenueList = () => {
     });
   }, [currentPage, fetchVenues]);
 
-  //   useEffect(() => {
-  //     fetchVenues(currentPage);
-  //   }, [currentPage]);
+  const filteredVenues = venues.filter((venue) =>
+    venue.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const goToNextPage = () => {
     useVenuesStore.setState((prev) => ({ currentPage: prev.currentPage + 1 }));
@@ -36,7 +37,7 @@ const VenueList = () => {
         ref={listRef}
         className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 '
       >
-        {venues.map((venue) => (
+        {filteredVenues.map((venue) => (
           <VenueCard key={venue.id} venue={venue} />
         ))}
       </div>

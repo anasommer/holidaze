@@ -7,6 +7,8 @@ const useVenuesStore = create((set, get) => ({
   error: null,
   currentPage: 0,
   limit: 15,
+  searchQuery: '',
+  setSearchQuery: (query) => set({ searchQuery: query }),
   resetPagination: () => set({ currentPage: 0 }),
   fetchVenues: async () => {
     set({ loading: true });
