@@ -7,14 +7,21 @@ const useVenuesStore = create((set) => ({
   searchQuery: '',
   currentPage: 1,
   itemsPerPage: 24,
+  loading: false,
+  error: null,
 
   fetchAllVenues: async () => {
+    set({ loading: true, error: null });
     try {
       const response = await fetch(`${API_URL}venues`);
       const data = await response.json();
-      set({ allVenues: data, displayedVenues: data.slice(0, 24) });
+      set({
+        allVenues: data,
+        displayedVenues: data.slice(0, 24),
+        loading: false,
+      });
     } catch (error) {
-      console.error('Error fetching venues:', error);
+      set({ error: error.message, loading: false });
     }
   },
 

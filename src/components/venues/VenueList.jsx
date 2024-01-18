@@ -3,8 +3,14 @@ import useVenuesStore from '../../store/venueStore';
 import VenueCard from './VenueCard';
 
 const VenueList = () => {
-  const { displayedVenues, fetchAllVenues, setCurrentPage, currentPage } =
-    useVenuesStore();
+  const {
+    displayedVenues,
+    fetchAllVenues,
+    setCurrentPage,
+    currentPage,
+    loading,
+    error,
+  } = useVenuesStore();
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -17,6 +23,20 @@ const VenueList = () => {
     useVenuesStore.getState().allVenues.length /
       useVenuesStore.getState().itemsPerPage
   );
+
+  if (loading) {
+    return (
+      <h3 className='text-center  text-3xl font-bold'>Loading venues...</h3>
+    );
+  }
+
+  if (error) {
+    return (
+      <h3 className='text-center  text-3xl font-bold text-red-700'>
+        Error: Something went wrong, try to refresh the page
+      </h3>
+    );
+  }
 
   return (
     <div>
