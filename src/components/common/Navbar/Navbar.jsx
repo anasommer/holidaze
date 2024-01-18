@@ -14,6 +14,10 @@ const Navbar = () => {
     resetPagination();
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <>
       <nav className='bg-gray-800 text-white font-mono pb-2'>
@@ -33,7 +37,7 @@ const Navbar = () => {
               type='text'
               className='p-2 w-full rounded-lg text-black'
               placeholder='Search Venues'
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearchChange}
             />
           </div>
 
