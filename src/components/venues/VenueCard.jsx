@@ -1,6 +1,7 @@
 import StarRating from '../../utils/rating';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
 const VenueCard = ({ venue }) => {
   return (
@@ -18,10 +19,9 @@ const VenueCard = ({ venue }) => {
           alt={venue.name}
         />
       )}
-
       <div className='flex-grow p-4 '>
         <div className='font-bold text-xl mb-2 '>{venue.name}</div>
-        <FontAwesomeIcon icon={faMapLocationDot} className=' mb-2' />{' '}
+        <FontAwesomeIcon icon={faMapLocationDot} className=' mb-2' />
         {venue.location.country}
         <p className='text-gray-700 text-base h-18 overflow-hidden '>
           <span className='text-2xl font-bold tracking-tight text-red-600'>
@@ -40,6 +40,18 @@ const VenueCard = ({ venue }) => {
       </div>
     </div>
   );
+};
+
+VenueCard.propTypes = {
+  venue: PropTypes.shape({
+    name: PropTypes.string,
+    media: PropTypes.array,
+    location: PropTypes.shape({
+      country: PropTypes.string,
+    }),
+    price: PropTypes.number,
+    rating: PropTypes.number,
+  }).isRequired,
 };
 
 export default VenueCard;
