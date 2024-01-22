@@ -34,6 +34,8 @@ const Navbar = () => {
           {/* Search Bar - Hidden on Mobile */}
           <div className='hidden md:flex items-center space-x-1 flex-1 max-w-md'>
             <input
+              id='searchBar'
+              name='searchBar'
               type='text'
               className='p-2 w-full rounded-lg text-black'
               placeholder='Search Venues'
