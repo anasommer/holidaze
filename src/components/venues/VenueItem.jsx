@@ -1,7 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
+import WifiIcon from '../../utils/icons/wifi';
 
 import useVenueDetailStore from '../../store/venueDetail';
+import ParkingIcon from '../../utils/icons/parking';
+import BreakfastIcon from '../../utils/icons/breakfast';
+import PetsIcon from '../../utils/icons/pets';
+import StarRating from '../../utils/rating';
 
 const VenueItem = () => {
   const { id } = useParams();
@@ -80,16 +87,38 @@ const VenueItem = () => {
               {/* Venue Information */}
               <div className='mt-8 text-center lg:text-left w-full'>
                 <h1 className='text-4xl font-semibold'>{venueData.name}</h1>
-                <p className='text-lg text-gray-700 mt-2'>
-                  {venueData.description}
-                </p>
-                <p className='text-lg text-red-600 font-bold mt-2'>
-                  ${venueData.price} USD
+                <p className='text-lg text-red-600 font-bold mt-1'>
+                  ${venueData.price} USD{' '}
+                  <span className='text-gray-500'>/ night</span>
                 </p>
                 <p className='text-lg text-gray-700 mt-2'>
-                  Location: {venueData.location.city},{' '}
-                  {venueData.location.country}
+                  <FontAwesomeIcon
+                    icon={faMapLocationDot}
+                    className=' mb-2 pr-2 mt-2'
+                  />
+                  {venueData.location.city}, {venueData.location.country}
+                </p>{' '}
+                <StarRating rating={venueData.rating} />
+                <p className='mt-2'>
+                  <span className='font-bold'>Max guests:</span>{' '}
+                  {venueData.maxGuests}
                 </p>
+                {Object.values(venueData.meta).some((value) => value) && (
+                  <div className='mt-2'>
+                    <p className='font-bold '>Facilities:</p>
+                    <div className='flex gap-3 pt-2 justify-center lg:justify-start'>
+                      {' '}
+                      {venueData.meta?.breakfast && <BreakfastIcon />}
+                      {venueData.meta?.wifi && <WifiIcon />}
+                      {venueData.meta?.parking && <ParkingIcon />}
+                      {venueData.meta?.pets && <PetsIcon />}
+                    </div>
+                  </div>
+                )}
+                <div className=' text-gray-700 mt-2'>
+                  <h2 className='font-bold'>Description:</h2>
+                  <p> {venueData.description}</p>
+                </div>
               </div>
             </div>
           </div>

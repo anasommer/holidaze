@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const VenueCard = ({ venue }) => {
   return (
-    <div className='flex flex-col max-w-sm rounded overflow-hidden shadow-xl shadow-gray-400 text-center'>
+    <div className='flex flex-col max-w-sm rounded overflow-hidden shadow-xl shadow-gray-400 text-center mb-4'>
       {venue.media.length > 0 ? (
         <img
           className='w-full h-48 object-cover'
@@ -20,9 +20,9 @@ const VenueCard = ({ venue }) => {
           alt={venue.name}
         />
       )}
-      <div className='flex-grow p-4 '>
+      <div className='flex-grow p-4'>
         <div className='font-bold text-xl mb-2 '>{venue.name}</div>
-        <FontAwesomeIcon icon={faMapLocationDot} className=' mb-2' />
+        <FontAwesomeIcon icon={faMapLocationDot} className=' mb-2 pr-2' />
         {venue.location.country}
         <p className='text-gray-700 text-base h-18 overflow-hidden '>
           <span className='text-2xl font-bold tracking-tight text-red-600'>
