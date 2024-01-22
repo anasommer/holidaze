@@ -5,6 +5,8 @@ import UserProfile from './components/user/UserProfile/UserProfile';
 import useAuthStore from './store/authStore';
 import UserRegister from './components/user/UserRegister/UserRegister';
 import UserLogin from './components/user/UserLogin/UserLogin';
+import VenueItem from './components/venues/VenueItem';
+import NotFound from './components/common/NotFound';
 
 function App() {
   const { isAuthorized } = useAuthStore();
@@ -15,6 +17,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<HomePage />} />
+            <Route path='/venue/:id' element={<VenueItem />} />
+            <Route path='*' element={<NotFound />} />
             {isAuthorized ? (
               <>
                 <Route path='/profile' element={<UserProfile />} />{' '}
