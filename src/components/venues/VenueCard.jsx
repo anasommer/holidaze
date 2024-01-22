@@ -2,6 +2,7 @@ import StarRating from '../../utils/rating';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const VenueCard = ({ venue }) => {
   return (
@@ -34,9 +35,12 @@ const VenueCard = ({ venue }) => {
         <StarRating rating={venue.rating} />
       </div>
       <div className='p-4'>
-        <button className='bg-amber-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded w-full'>
+        <Link
+          to={`/venue/${venue.id}`}
+          className='bg-amber-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded w-full'
+        >
           View Venue
-        </button>
+        </Link>
       </div>
     </div>
   );
@@ -44,6 +48,7 @@ const VenueCard = ({ venue }) => {
 
 VenueCard.propTypes = {
   venue: PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
     media: PropTypes.array,
     location: PropTypes.shape({

@@ -19,6 +19,8 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path='/venue/:id' element={<VenueItem />} />
             <Route path='*' element={<NotFound />} />
+
+            {/* Only for authorized users */}
             {isAuthorized ? (
               <>
                 <Route path='/profile' element={<UserProfile />} />{' '}
