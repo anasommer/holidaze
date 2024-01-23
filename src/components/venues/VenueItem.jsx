@@ -20,7 +20,6 @@ const VenueItem = () => {
     fetchVenueDetails,
     selectedImage,
     setSelectedImage,
-    startDate,
     selectedDate,
     setSelectedDate,
   } = useVenueDetailStore();
