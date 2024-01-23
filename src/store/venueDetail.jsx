@@ -9,6 +9,10 @@ const useVenueDetailStore = create((set) => ({
   setSelectedImage: (image) => {
     set({ selectedImage: image });
   },
+  selectedDate: new Date(),
+  setSelectedDate: (date) => {
+    set({ selectDate: date });
+  },
 
   fetchVenueDetails: async (venueId) => {
     set({ loading: true, error: null });

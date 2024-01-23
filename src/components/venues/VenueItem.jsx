@@ -3,12 +3,13 @@ import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import WifiIcon from '../../utils/icons/wifi';
-
 import useVenueDetailStore from '../../store/venueDetail';
 import ParkingIcon from '../../utils/icons/parking';
 import BreakfastIcon from '../../utils/icons/breakfast';
 import PetsIcon from '../../utils/icons/pets';
 import StarRating from '../../utils/rating';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const VenueItem = () => {
   const { id } = useParams();
@@ -19,6 +20,9 @@ const VenueItem = () => {
     fetchVenueDetails,
     selectedImage,
     setSelectedImage,
+    startDate,
+    selectedDate,
+    setSelectedDate,
   } = useVenueDetailStore();
 
   useEffect(() => {
@@ -105,7 +109,7 @@ const VenueItem = () => {
                 </p>
                 {Object.values(venueData.meta).some((value) => value) && (
                   <div className='mt-2'>
-                    <p className='font-bold '>Facilities:</p>
+                    <span className='font-bold '>Facilities:</span>
                     <div className='flex gap-3 pt-2 justify-center lg:justify-start'>
                       {' '}
                       {venueData.meta?.breakfast && <BreakfastIcon />}
@@ -119,6 +123,17 @@ const VenueItem = () => {
                   <h2 className='font-bold'>Description:</h2>
                   <p> {venueData.description}</p>
                 </div>
+                {/* Render the date picker */}
+                <h3 className='font-bold mt-3'>Book:</h3>
+                <DatePicker
+                  showIcon
+                  selected={selectedDate}
+                  onChange={(selectedDate) => setSelectedDate(selectedDate)}
+                />
+                {/* Display the selected date */}
+                {selectedDate && (
+                  <p>Selected Date: {selectedDate.toDateString()}</p>
+                )}
               </div>
             </div>
           </div>
