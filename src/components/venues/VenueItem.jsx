@@ -14,7 +14,8 @@ import useAuthStore from '../../store/authStore';
 
 const VenueItem = () => {
   const { id } = useParams();
-  const { isAuthorized, isVenueManager } = useAuthStore();
+  // eslint-disable-next-line no-unused-vars
+  const { isAuthorized } = useAuthStore();
   const {
     venueData,
     loading,
