@@ -30,13 +30,17 @@ const UserRegister = () => {
             Username
           </label>
           <input
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-amber-500'
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              errors.name ? 'border-red-500' : ''
+            }`}
             id='username'
             type='text'
             placeholder='Username'
             {...register('name')}
           />
-          {errors.name && <p>{errors.name.message}</p>}
+          {errors.name && (
+            <p className='text-red-500 text-sm italic'>{errors.name.message}</p>
+          )}
         </div>
         <div className='mb-4'>
           <label
@@ -46,13 +50,19 @@ const UserRegister = () => {
             E-mail
           </label>
           <input
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-amber-500'
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              errors.email ? 'border-red-500' : ''
+            }`}
             id='email'
             type='text'
             placeholder='E-mail'
             {...register('email')}
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && (
+            <p className='text-red-500 text-sm italic'>
+              {errors.email.message}
+            </p>
+          )}
         </div>
         <div className='mb-2'>
           <label
@@ -62,16 +72,19 @@ const UserRegister = () => {
             Password
           </label>
           <input
-            className='shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-amber-500'
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              errors.password ? 'border-red-500' : ''
+            }`}
             id='password'
             type='password'
             placeholder='Password'
             {...register('password')}
           />
-          {errors.password && <p>{errors.password.message}</p>}
-          {/* <p className='text-red-500 text-xs italic'>
-          Please choose a password.
-        </p> */}
+          {errors.password && (
+            <p className='text-red-500 text-sm italic'>
+              {errors.password.message}
+            </p>
+          )}
         </div>
 
         <div className='mb-6'>
@@ -82,13 +95,19 @@ const UserRegister = () => {
             Avatar
           </label>
           <input
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-amber-500'
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              errors.avatar ? 'border-red-500' : ''
+            }`}
             id='avatar'
             type='text'
             placeholder='Url to avatar'
             {...register('avatar')}
           />
-          {errors.avatar && <p>{errors.avatar.message}</p>}
+          {errors.avatar && (
+            <p className='text-red-500 text-sm italic'>
+              {errors.avatar.message}
+            </p>
+          )}
         </div>
         <div className='md:flex md:items-center mb-4'>
           <label className='  text-rose-800 font-semibold'>
