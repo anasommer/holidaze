@@ -10,9 +10,11 @@ import PetsIcon from '../../utils/icons/pets';
 import StarRating from '../../utils/rating';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import useAuthStore from '../../store/authStore';
 
 const VenueItem = () => {
   const { id } = useParams();
+  const { isAuthorized, isVenueManager } = useAuthStore();
   const {
     venueData,
     loading,
@@ -122,16 +124,16 @@ const VenueItem = () => {
                   <h2 className='font-bold'>Description:</h2>
                   <p> {venueData.description}</p>
                 </div>
-                {/* Render the date picker */}
-                <h3 className='font-bold mt-3'>Book:</h3>
-                <DatePicker
-                  showIcon
-                  selected={selectedDate}
-                  onChange={(selectedDate) => setSelectedDate(selectedDate)}
-                />
-                {/* Display the selected date */}
-                {selectedDate && (
-                  <p>Selected Date: {selectedDate.toDateString()}</p>
+                {/* Render the calendar for authorized users */}
+                {isAuthorized && (
+                  <div>
+                    <h3 className='font-bold mt-3'>Check availability:</h3>
+                    <DatePicker
+                      showIcon
+                      selected={selectedDate}
+                      onChange={(selectedDate) => setSelectedDate(selectedDate)}
+                    />
+                  </div>
                 )}
               </div>
             </div>
