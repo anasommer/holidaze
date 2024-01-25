@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../../utils/schema';
 import useAuthStore from '../../../store/authStore';
-import registerUser from '../../../services/api/authService';
+import { registerUser } from '../../../services/api/authService';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
