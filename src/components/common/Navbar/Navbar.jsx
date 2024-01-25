@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuthStore from '../../../store/authStore';
 import useVenuesStore from '../../../store/venueStore';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -9,9 +10,17 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const resetPagination = useVenuesStore((state) => state.resetPagination);
   const setSearchQuery = useVenuesStore((state) => state.setSearchQuery);
+  const navigate = useNavigate();
+  const logout = useAuthStore((state) => state.logout);
 
   const handleLogoClick = () => {
     resetPagination();
+  };
+
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem('token');
+    navigate('/');
   };
 
   const handleSearchChange = (e) => {
@@ -111,12 +120,12 @@ const Navbar = () => {
                   )}
 
                   <div className='border-t border-amber-400 my-1 '></div>
-                  <Link
-                    to='/logout'
+                  <button
+                    onClick={handleLogout}
                     className='block px-4 py-2 text-sm hover:bg-red-400 hover:text-black text-neutral-100'
                   >
                     Logout
-                  </Link>
+                  </button>
                 </div>
               )}
             </div>
