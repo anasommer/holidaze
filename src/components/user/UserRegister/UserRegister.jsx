@@ -1,6 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../../utils/schema';
+import useAuthStore from '../../../store/authStore';
+import registerUser from '../../../services/api/authService';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const UserRegister = () => {
   const {
@@ -11,13 +15,26 @@ const UserRegister = () => {
     resolver: yupResolver(schema),
   });
 
-  function onSubmit(data) {
+  const { login } = useAuthStore();
+  const navigate = useNavigate();
+  const [registrationError, setRegistrationError] = useState('');
+
+  const onSubmit = async (data) => {
     console.log(data);
-  }
+    try {
+      const result = await registerUser(data);
+      console.log(result);
+      login(data.venueManager);
+      navigate('/profile');
+    } catch (error) {
+      setRegistrationError('Registration failed: User already exists');
+    }
+  };
 
   return (
     <div className='w-full max-w-xs mx-auto my-10'>
       <h1 className='text-center mb-2 font-bold text-2xl'>Sign Up</h1>
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
@@ -39,7 +56,9 @@ const UserRegister = () => {
             {...register('name')}
           />
           {errors.name && (
-            <p className='text-red-500 text-sm italic'>{errors.name.message}</p>
+            <p className='text-red-500 text-sm italic m-auto'>
+              {errors.name.message}
+            </p>
           )}
         </div>
         <div className='mb-4'>
@@ -125,6 +144,11 @@ const UserRegister = () => {
           </button>
         </div>
       </form>
+      {registrationError && (
+        <p className='text-red-500 text-md italic text-center'>
+          {registrationError}
+        </p>
+      )}
     </div>
   );
 };
