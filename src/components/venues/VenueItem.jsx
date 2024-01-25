@@ -45,8 +45,6 @@ const VenueItem = () => {
     );
   }
 
-  console.log(venueData);
-
   const handleThumbnailClick = (image) => {
     setSelectedImage(image);
   };

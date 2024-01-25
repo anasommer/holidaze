@@ -20,10 +20,10 @@ const UserRegister = () => {
   const [registrationError, setRegistrationError] = useState('');
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
+      // eslint-disable-next-line no-unused-vars
       const result = await registerUser(data);
-      console.log(result);
+
       login(data.venueManager);
       navigate('/profile');
     } catch (error) {
