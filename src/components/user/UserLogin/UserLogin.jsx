@@ -18,6 +18,7 @@ const UserLogin = () => {
 
       if (response.accessToken) {
         localStorage.setItem('token', response.accessToken);
+        localStorage.setItem('isManager', response.venueManager);
 
         login(response.venueManager);
 

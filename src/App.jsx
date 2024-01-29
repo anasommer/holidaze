@@ -7,9 +7,15 @@ import UserRegister from './components/user/UserRegister/UserRegister';
 import UserLogin from './components/user/UserLogin/UserLogin';
 import VenueItem from './components/venues/VenueItem';
 import NotFound from './components/common/NotFound';
+import { useEffect } from 'react';
 
 function App() {
   const { isAuthorized } = useAuthStore();
+  const initializeAuth = useAuthStore((state) => state.initializeAuth);
+
+  useEffect(() => {
+    initializeAuth();
+  }, [initializeAuth]);
 
   return (
     <>
