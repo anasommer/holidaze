@@ -6,6 +6,7 @@ const useAuthStore = create((set) => ({
   initializeAuth: () => {
     const token = localStorage.getItem('token');
     const isManager = localStorage.getItem('isManager');
+    const name = localStorage.getItem('username');
     if (token) {
       set({ isAuthorized: true, isVenueManager: isManager });
     }
@@ -13,7 +14,10 @@ const useAuthStore = create((set) => ({
 
   login: (isManager = false) =>
     set({ isAuthorized: true, isVenueManager: isManager }),
-  logout: () => set({ isAuthorized: false, isVenueManager: false }),
+  logout: () => {
+    set({ isAuthorized: false, isVenueManager: false });
+    localStorage.clear();
+  },
 }));
 
 export default useAuthStore;
