@@ -8,13 +8,18 @@ const UserProfile = () => {
   const avatarUrl = useUserStore((state) => state.avatarUrl);
 
   const handleSubmit = async () => {
+    if (!newAvatarUrl.trim()) {
+      setError('Please enter a valid URL');
+      return;
+    }
+
     try {
       const updatedAvatarUrl = await updateAvatarUrl(newAvatarUrl);
       useUserStore.getState().setAvatarUrl(updatedAvatarUrl);
-      setNewAvatarUrl('');
     } catch (error) {
       setError(error.message);
     }
+    setNewAvatarUrl('');
   };
 
   return (
