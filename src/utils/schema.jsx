@@ -20,7 +20,7 @@ const schema = yup.object({
     .string()
     .min(8, 'Password must be at least 8 characters')
     .required('Password is required'),
-  avatar: yup.string().url('Invalid URL format').notRequired(),
+  avatar: yup.string().url('Invalid URL format'),
   venueManager: yup.boolean(),
 });
 

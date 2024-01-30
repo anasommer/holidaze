@@ -47,7 +47,7 @@ const UserProfile = () => {
           id='avatar'
           type='text'
           value={newAvatarUrl}
-          placeholder='Url to new avatar'
+          placeholder='Enter a valid URL'
           onChange={(e) => setNewAvatarUrl(e.target.value)}
         />
         <button
