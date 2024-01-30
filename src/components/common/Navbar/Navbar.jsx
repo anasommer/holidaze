@@ -17,6 +17,11 @@ const Navbar = () => {
     resetPagination();
   };
 
+  const handleDropdownItemClick = (path) => {
+    setIsDropdownOpen(false);
+    navigate(path);
+  };
+
   const handleLogout = () => {
     logout();
     localStorage.removeItem('token');
@@ -26,6 +31,11 @@ const Navbar = () => {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
+
+  const userAvatar =
+    localStorage.getItem('avatar') === ''
+      ? '../../src/assets/images/user-avatar.jpeg'
+      : localStorage.getItem('avatar');
 
   return (
     <>
@@ -57,9 +67,9 @@ const Navbar = () => {
             // User Avatar and Dropdown
             <div className='relative py-2'>
               <img
-                src='/src/assets/images/user-avatar.jpeg'
+                src={userAvatar}
                 alt='User avatar'
-                className='h-8 w-8 rounded-full cursor-pointer mt-3'
+                className=' h-8 w-8 rounded-full cursor-pointer mt-3'
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               />{' '}
               <svg
@@ -84,18 +94,18 @@ const Navbar = () => {
                   <div className='px-4 py-2 text-xs  bg-gray-800 text-amber-400 '>
                     User Options:
                   </div>
-                  <Link
-                    to='/profile'
+                  <li
+                    onClick={() => handleDropdownItemClick('./profile')}
                     className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100 hover:bg-amber-300 hover:text-black'
                   >
                     Profile
-                  </Link>
-                  <Link
-                    to='/bookings'
+                  </li>
+                  <li
+                    onClick={() => handleDropdownItemClick('./bookings')}
                     className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100 hover:bg-amber-300 hover:text-black'
                   >
                     Your Bookings
-                  </Link>
+                  </li>
 
                   {isVenueManager && (
                     <>
@@ -103,18 +113,20 @@ const Navbar = () => {
                       <div className='px-4 py-2 text-xs bg-gray-800 text-amber-400'>
                         Manager Options:
                       </div>
-                      <Link
-                        to='/manage-venues'
+                      <li
+                        onClick={() => handleDropdownItemClick('./create')}
                         className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100 hover:bg-amber-300 hover:text-black'
                       >
                         Create Venue
-                      </Link>
-                      <Link
-                        to='/manage-venues'
+                      </li>
+                      <li
+                        onClick={() =>
+                          handleDropdownItemClick('./manage-venues')
+                        }
                         className='block px-4 py-2 text-sm bg-gray-800 text-neutral-100 hover:bg-amber-300 hover:text-black'
                       >
                         Manage Venues
-                      </Link>
+                      </li>
                       {/* Additional venue manager links */}
                     </>
                   )}

@@ -1,6 +1,6 @@
 const UserProfile = () => {
   const userAvatar =
-    localStorage.getItem('avatar') === 'undefined'
+    localStorage.getItem('avatar') === ''
       ? 'src/assets/images/user-avatar.jpeg'
       : localStorage.getItem('avatar');
 
