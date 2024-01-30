@@ -20,6 +20,7 @@ const UserProfile = () => {
       setError(error.message);
     }
     setNewAvatarUrl('');
+    setError('');
   };
 
   return (
@@ -52,6 +53,7 @@ const UserProfile = () => {
         <button
           className='bg-amber-400 hover:bg-green-500 hover:text-white text-black font-bold py-2 px-4 rounded block mt-2  m-auto'
           onClick={handleSubmit}
+          disabled={!newAvatarUrl.trim()}
         >
           Update
         </button>
