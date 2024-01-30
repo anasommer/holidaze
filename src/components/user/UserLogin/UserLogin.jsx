@@ -21,6 +21,7 @@ const UserLogin = () => {
         localStorage.setItem('token', response.accessToken);
         localStorage.setItem('isManager', response.venueManager);
         localStorage.setItem('username', response.name);
+        localStorage.setItem('avatar', response.avatar);
 
         login(response.venueManager);
 

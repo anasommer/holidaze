@@ -6,6 +6,7 @@ const useAuthStore = create((set) => ({
   initializeAuth: () => {
     const token = localStorage.getItem('token');
     const isManager = localStorage.getItem('isManager');
+    // eslint-disable-next-line no-unused-vars
     const name = localStorage.getItem('username');
     if (token) {
       set({ isAuthorized: true, isVenueManager: isManager });
