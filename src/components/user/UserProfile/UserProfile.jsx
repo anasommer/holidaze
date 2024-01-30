@@ -1,8 +1,21 @@
+import { useState } from 'react';
+import updateAvatarUrl from '../../../services/api/updateAvatar';
+import useUserStore from '../../../store/userStore';
+
 const UserProfile = () => {
-  const userAvatar =
-    localStorage.getItem('avatar') === ''
-      ? 'src/assets/images/user-avatar.jpeg'
-      : localStorage.getItem('avatar');
+  const [newAvatarUrl, setNewAvatarUrl] = useState('');
+  const [error, setError] = useState('');
+  const avatarUrl = useUserStore((state) => state.avatarUrl);
+
+  const handleSubmit = async () => {
+    try {
+      const updatedAvatarUrl = await updateAvatarUrl(newAvatarUrl);
+      useUserStore.getState().setAvatarUrl(updatedAvatarUrl);
+      setNewAvatarUrl('');
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <div className='flex flex-col max-w-sm rounded overflow-hidden shadow-xl shadow-gray-400 text-center my-4 m-auto'>
@@ -13,7 +26,7 @@ const UserProfile = () => {
 
         <img
           className='size-32 md:size-40 m-auto rounded'
-          src={userAvatar}
+          src={avatarUrl}
           alt={`User's avatar`}
         />
 
@@ -27,11 +40,17 @@ const UserProfile = () => {
           className='shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           id='avatar'
           type='text'
+          value={newAvatarUrl}
           placeholder='Url to new avatar'
+          onChange={(e) => setNewAvatarUrl(e.target.value)}
         />
-        <button className='bg-amber-400 hover:bg-green-500 hover:text-white text-black font-bold py-2 px-4 rounded block mt-2  m-auto'>
+        <button
+          className='bg-amber-400 hover:bg-green-500 hover:text-white text-black font-bold py-2 px-4 rounded block mt-2  m-auto'
+          onClick={handleSubmit}
+        >
           Update
         </button>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
     </div>
   );

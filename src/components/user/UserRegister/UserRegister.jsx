@@ -21,10 +21,12 @@ const UserRegister = () => {
 
   const onSubmit = async (data) => {
     try {
-      // eslint-disable-next-line no-unused-vars
       const result = await registerUser(data);
+      localStorage.setItem('token', data.accessToken);
+      localStorage.setItem('username', data.name);
+      localStorage.setItem('avatar', data.avatar);
 
-      login(data.venueManager);
+      login(data.venueManager, data.name, data.avatar);
       navigate('/profile');
     } catch (error) {
       setRegistrationError('Registration failed: User already exists');

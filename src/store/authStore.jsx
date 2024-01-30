@@ -3,20 +3,41 @@ import { create } from 'zustand';
 const useAuthStore = create((set) => ({
   isAuthorized: false,
   isVenueManager: false,
+  username: localStorage.getItem('username') || '',
+  avatarUrl:
+    localStorage.getItem('avatar') || 'src/assets/images/user-avatar.jpeg',
+
   initializeAuth: () => {
     const token = localStorage.getItem('token');
-    const isManager = localStorage.getItem('isManager');
-    // eslint-disable-next-line no-unused-vars
-    const name = localStorage.getItem('username');
+    const isManager = localStorage.getItem('isManager') === 'true';
+    const username = localStorage.getItem('username') || '';
+    const avatarUrl =
+      localStorage.getItem('avatar') || 'src/assets/images/user-avatar.jpeg';
+
     if (token) {
-      set({ isAuthorized: true, isVenueManager: isManager });
+      set({
+        isAuthorized: true,
+        isVenueManager: isManager,
+        username,
+        avatarUrl,
+      });
     }
   },
 
-  login: (isManager = false) =>
-    set({ isAuthorized: true, isVenueManager: isManager }),
+  login: (
+    isManager = false,
+    username = '',
+    avatarUrl = 'src/assets/images/user-avatar.jpeg'
+  ) =>
+    set({ isAuthorized: true, isVenueManager: isManager, username, avatarUrl }),
+
   logout: () => {
-    set({ isAuthorized: false, isVenueManager: false });
+    set({
+      isAuthorized: false,
+      isVenueManager: false,
+      username: '',
+      avatarUrl: 'src/assets/images/user-avatar.jpeg',
+    });
     localStorage.clear();
   },
 }));

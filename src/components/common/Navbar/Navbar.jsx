@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useAuthStore from '../../../store/authStore';
 import useVenuesStore from '../../../store/venueStore';
 import { useNavigate } from 'react-router-dom';
+import useUserStore from '../../../store/userStore';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,6 +13,7 @@ const Navbar = () => {
   const setSearchQuery = useVenuesStore((state) => state.setSearchQuery);
   const navigate = useNavigate();
   const logout = useAuthStore((state) => state.logout);
+  const avatarUrl = useUserStore((state) => state.avatarUrl);
 
   const handleLogoClick = () => {
     resetPagination();
@@ -31,11 +33,6 @@ const Navbar = () => {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
-
-  const userAvatar =
-    localStorage.getItem('avatar') === ''
-      ? '../../src/assets/images/user-avatar.jpeg'
-      : localStorage.getItem('avatar');
 
   return (
     <>
@@ -67,7 +64,7 @@ const Navbar = () => {
             // User Avatar and Dropdown
             <div className='relative py-2'>
               <img
-                src={userAvatar}
+                src={avatarUrl}
                 alt='User avatar'
                 className=' h-8 w-8 rounded-full cursor-pointer mt-3'
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
