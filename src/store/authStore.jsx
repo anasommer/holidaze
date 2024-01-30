@@ -27,7 +27,8 @@ const useAuthStore = create((set) => ({
   login: (
     isManager = false,
     username = '',
-    avatarUrl = 'src/assets/images/user-avatar.jpeg'
+    avatarUrl = localStorage.getItem('avatar') ||
+      'src/assets/images/user-avatar.jpeg'
   ) =>
     set({ isAuthorized: true, isVenueManager: isManager, username, avatarUrl }),
 
@@ -36,7 +37,6 @@ const useAuthStore = create((set) => ({
       isAuthorized: false,
       isVenueManager: false,
       username: '',
-      avatarUrl: 'src/assets/images/user-avatar.jpeg',
     });
     localStorage.clear();
   },
