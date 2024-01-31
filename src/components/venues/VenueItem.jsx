@@ -26,6 +26,8 @@ const VenueItem = () => {
     selectedDate,
     setSelectedDate,
     disabledDates,
+    dateRange,
+    setDateRange,
   } = useVenueDetailStore();
 
   useEffect(() => {
@@ -45,6 +47,11 @@ const VenueItem = () => {
       </h3>
     );
   }
+
+  const handleDateChange = (dates) => {
+    const [start, end] = dates;
+    setDateRange({ startDate: start, endDate: end });
+  };
 
   const handleThumbnailClick = (image) => {
     setSelectedImage(image);
@@ -127,17 +134,24 @@ const VenueItem = () => {
                 {/* Render the calendar for authorized users */}
                 <div className='flex flex-col items-center lg:items-start'>
                   <h3 className='font-bold mt-3'>Check availability:</h3>
-                  <div className='flex justify-center items-center mt-2 lg:items-start lg:justify-start w-full '>
+                  <div className='flex justify-center items-center mt-2 lg:items-start lg:justify-start '>
                     <DatePicker
-                      selected={selectedDate}
-                      onChange={(date) => setSelectedDate(date)}
+                      startDate={dateRange.startDate}
+                      endDate={dateRange.endDate}
+                      selectsRange
+                      inline
+                      onChange={handleDateChange}
                       excludeDates={disabledDates}
-                      className='text-center'
-                      showIcon
+                      className='text-center w-[110%]'
                     />
                   </div>
                   {isAuthorized && (
-                    <button className='bg-amber-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded mt-2 w-[210px] md:w-[30%]'>
+                    <button
+                      className='bg-amber-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded mt-2 w-[210px] md:w-[30%]'
+                      onClick={() => {
+                        console.log(dateRange.startDate, dateRange.endDate);
+                      }}
+                    >
                       Book
                     </button>
                   )}

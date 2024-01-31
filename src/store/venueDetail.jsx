@@ -14,6 +14,8 @@ const useVenueDetailStore = create((set) => ({
     set({ selectDate: date });
   },
   disabledDates: [],
+  dateRange: { startDate: null, endDate: null },
+  setDateRange: (range) => set({ dateRange: range }),
 
   fetchVenueDetails: async (venueId) => {
     set({ loading: true, error: null });
