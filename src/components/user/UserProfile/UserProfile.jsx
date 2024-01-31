@@ -7,8 +7,17 @@ const UserProfile = () => {
   const [error, setError] = useState('');
   const avatarUrl = useUserStore((state) => state.avatarUrl);
 
+  const isValidUrl = (urlString) => {
+    try {
+      new URL(urlString);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+
   const handleSubmit = async () => {
-    if (!newAvatarUrl.trim()) {
+    if (!newAvatarUrl.trim() || !isValidUrl(newAvatarUrl)) {
       setError('Please enter a valid URL');
       return;
     }

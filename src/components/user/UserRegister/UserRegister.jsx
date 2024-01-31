@@ -35,7 +35,7 @@ const UserRegister = () => {
       {registrationSuccess ? (
         <div className='w-full max-w-xs mx-auto my-10'>
           <h1 className='text-center mb-2 font-bold text-2xl'>
-            Successfully signed up!
+            Successfully signed up! Redirecting...
           </h1>
         </div>
       ) : (
