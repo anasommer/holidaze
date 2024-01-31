@@ -1,25 +1,27 @@
 import { create } from 'zustand';
 
+const getLocalStorageItem = (key, defaultValue) =>
+  localStorage.getItem(key) || defaultValue;
+
+const defaultAvatarUrl = 'src/assets/images/user-avatar.jpeg';
+
 const useAuthStore = create((set) => ({
   isAuthorized: false,
   isVenueManager: false,
-  username: localStorage.getItem('username') || '',
-  avatarUrl:
-    localStorage.getItem('avatar') || 'src/assets/images/user-avatar.jpeg',
+  username: getLocalStorageItem('username', ''),
+  avatarUrl: getLocalStorageItem('avatar', defaultAvatarUrl),
 
   initializeAuth: () => {
-    const token = localStorage.getItem('token');
-    const isManager = localStorage.getItem('isManager') === 'true';
-    const username = localStorage.getItem('username') || '';
-    const avatarUrl =
-      localStorage.getItem('avatar') || 'src/assets/images/user-avatar.jpeg';
+    const token = getLocalStorageItem('token', null);
+    const isManager = getLocalStorageItem('isManager', 'false') === 'true';
+    const username = getLocalStorageItem('username', '');
 
     if (token) {
       set({
         isAuthorized: true,
         isVenueManager: isManager,
         username,
-        avatarUrl,
+        avatarUrl: getLocalStorageItem('avatar', defaultAvatarUrl),
       });
     }
   },
@@ -27,8 +29,7 @@ const useAuthStore = create((set) => ({
   login: (
     isManager = false,
     username = '',
-    avatarUrl = localStorage.getItem('avatar') ||
-      'src/assets/images/user-avatar.jpeg'
+    avatarUrl = getLocalStorageItem('avatar', defaultAvatarUrl)
   ) =>
     set({ isAuthorized: true, isVenueManager: isManager, username, avatarUrl }),
 
@@ -37,6 +38,7 @@ const useAuthStore = create((set) => ({
       isAuthorized: false,
       isVenueManager: false,
       username: '',
+      avatarUrl: defaultAvatarUrl,
     });
     localStorage.clear();
   },
