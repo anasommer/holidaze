@@ -11,6 +11,7 @@ import StarRating from '../../utils/rating';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import useAuthStore from '../../store/authStore';
+import BookingForm from '../booking/BookingForm/BookingForm';
 
 const VenueItem = () => {
   const { id } = useParams();
@@ -23,8 +24,7 @@ const VenueItem = () => {
     fetchVenueDetails,
     selectedImage,
     setSelectedImage,
-    selectedDate,
-    setSelectedDate,
+
     disabledDates,
     dateRange,
     setDateRange,
@@ -146,14 +146,17 @@ const VenueItem = () => {
                     />
                   </div>
                   {isAuthorized && (
-                    <button
-                      className='bg-amber-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded mt-2 w-[210px] md:w-[30%]'
-                      onClick={() => {
-                        console.log(dateRange.startDate, dateRange.endDate);
-                      }}
-                    >
-                      Book
-                    </button>
+                    <>
+                      <BookingForm />
+                      <button
+                        className='bg-amber-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded mt-2 w-[210px] md:w-[30%]'
+                        onClick={() => {
+                          console.log(dateRange.startDate, dateRange.endDate);
+                        }}
+                      >
+                        Book
+                      </button>
+                    </>
                   )}
                 </div>
               </div>
