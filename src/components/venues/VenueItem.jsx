@@ -125,13 +125,19 @@ const VenueItem = () => {
                 </div>
                 {/* Render the calendar for authorized users */}
                 {isAuthorized && (
-                  <div>
+                  <div className='flex flex-col items-center lg:items-start'>
                     <h3 className='font-bold mt-3'>Check availability:</h3>
-                    <DatePicker
-                      showIcon
-                      selected={selectedDate}
-                      onChange={(selectedDate) => setSelectedDate(selectedDate)}
-                    />
+                    <div className='flex justify-center items-center mt-2 lg:items-start lg:justify-start w-full '>
+                      <DatePicker
+                        selected={selectedDate}
+                        onChange={(date) => setSelectedDate(date)}
+                        className='text-center'
+                        showIcon
+                      />
+                    </div>
+                    <button className='bg-amber-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded mt-2 w-[210px] md:w-[30%]'>
+                      Book
+                    </button>
                   </div>
                 )}
               </div>
