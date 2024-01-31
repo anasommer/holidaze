@@ -25,6 +25,7 @@ const VenueItem = () => {
     setSelectedImage,
     selectedDate,
     setSelectedDate,
+    disabledDates,
   } = useVenueDetailStore();
 
   useEffect(() => {
@@ -130,6 +131,7 @@ const VenueItem = () => {
                     <DatePicker
                       selected={selectedDate}
                       onChange={(date) => setSelectedDate(date)}
+                      excludeDates={disabledDates}
                       className='text-center'
                       showIcon
                     />
