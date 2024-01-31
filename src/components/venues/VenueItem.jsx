@@ -14,7 +14,7 @@ import useAuthStore from '../../store/authStore';
 
 const VenueItem = () => {
   const { id } = useParams();
-  // eslint-disable-next-line no-unused-vars
+
   const { isAuthorized } = useAuthStore();
   const {
     venueData,
@@ -124,22 +124,22 @@ const VenueItem = () => {
                   <p> {venueData.description}</p>
                 </div>
                 {/* Render the calendar for authorized users */}
-                {isAuthorized && (
-                  <div className='flex flex-col items-center lg:items-start'>
-                    <h3 className='font-bold mt-3'>Check availability:</h3>
-                    <div className='flex justify-center items-center mt-2 lg:items-start lg:justify-start w-full '>
-                      <DatePicker
-                        selected={selectedDate}
-                        onChange={(date) => setSelectedDate(date)}
-                        className='text-center'
-                        showIcon
-                      />
-                    </div>
+                <div className='flex flex-col items-center lg:items-start'>
+                  <h3 className='font-bold mt-3'>Check availability:</h3>
+                  <div className='flex justify-center items-center mt-2 lg:items-start lg:justify-start w-full '>
+                    <DatePicker
+                      selected={selectedDate}
+                      onChange={(date) => setSelectedDate(date)}
+                      className='text-center'
+                      showIcon
+                    />
+                  </div>
+                  {isAuthorized && (
                     <button className='bg-amber-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded mt-2 w-[210px] md:w-[30%]'>
                       Book
                     </button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>

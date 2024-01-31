@@ -17,8 +17,11 @@ const useVenueDetailStore = create((set) => ({
   fetchVenueDetails: async (venueId) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(`${API_URL}venues/${venueId}`);
+      const response = await fetch(
+        `${API_URL}venues/${venueId}?_bookings=true`
+      );
       const data = await response.json();
+
       set({ venueData: data, loading: false, selectedImage: data.media[0] });
     } catch (error) {
       set({ error: error.message, loading: false });
