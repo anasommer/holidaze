@@ -8,6 +8,7 @@ import UserLogin from './components/user/UserLogin/UserLogin';
 import VenueItem from './components/venues/VenueItem';
 import NotFound from './components/common/NotFound';
 import { useEffect } from 'react';
+import { UserBookings } from './components/user/UserBookings/UserBookings';
 
 function App() {
   const { isAuthorized } = useAuthStore();
@@ -29,7 +30,8 @@ function App() {
             {/* Only for authorized users */}
             {isAuthorized ? (
               <>
-                <Route path='/profile' element={<UserProfile />} />{' '}
+                <Route path='/profile' element={<UserProfile />} />
+                <Route path='/bookings' element={<UserBookings />} />
               </>
             ) : (
               //  Routes for all users
