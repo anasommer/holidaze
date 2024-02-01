@@ -15,7 +15,6 @@ import BookingForm from '../booking/BookingForm/BookingForm';
 
 const VenueItem = () => {
   const { id } = useParams();
-
   const { isAuthorized } = useAuthStore();
   const {
     venueData,
@@ -24,7 +23,6 @@ const VenueItem = () => {
     fetchVenueDetails,
     selectedImage,
     setSelectedImage,
-
     disabledDates,
     dateRange,
     setDateRange,
@@ -103,21 +101,22 @@ const VenueItem = () => {
                   ${venueData.price} USD{' '}
                   <span className='text-gray-500'>/ night</span>
                 </p>
-                <p className='text-lg text-gray-700 mt-2'>
+                <p className='text-lg text-gray-700 my-2'>
                   <FontAwesomeIcon
                     icon={faMapLocationDot}
                     className=' mb-2 pr-2 mt-2'
                   />
                   {venueData.location.city}, {venueData.location.country}
                 </p>{' '}
+                <h2 className='font-bold'>Rating:</h2>
                 <StarRating rating={venueData.rating} />
-                <p className='mt-2'>
-                  <span className='font-bold'>Max guests:</span>{' '}
+                <div className='mt-2'>
+                  <h2 className='font-bold'>Max guests:</h2>{' '}
                   {venueData.maxGuests}
-                </p>
+                </div>
                 {Object.values(venueData.meta).some((value) => value) && (
                   <div className='mt-2'>
-                    <span className='font-bold '>Facilities:</span>
+                    <h2 className='font-bold'>Facilities:</h2>
                     <div className='flex gap-3 pt-2 justify-center lg:justify-start'>
                       {' '}
                       {venueData.meta?.breakfast && <BreakfastIcon />}
@@ -133,7 +132,9 @@ const VenueItem = () => {
                 </div>
                 {/* Render the calendar for authorized users */}
                 <div className='flex flex-col items-center lg:items-start'>
-                  <h3 className='font-bold mt-3'>Check availability:</h3>
+                  <h3 className='font-bold mt-5 text-xl'>
+                    {isAuthorized ? 'Book a stay:' : 'Check availability:'}
+                  </h3>
                   <div className='flex justify-center items-center mt-2 lg:items-start lg:justify-start '>
                     <DatePicker
                       startDate={dateRange.startDate}
@@ -145,22 +146,14 @@ const VenueItem = () => {
                       className='text-center w-[110%]'
                     />
                   </div>
-                  {isAuthorized && (
-                    <>
-                      <BookingForm />
-                      <button
-                        className='bg-amber-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded mt-2 w-[210px] md:w-[30%]'
-                        onClick={() => {
-                          console.log(dateRange.startDate, dateRange.endDate);
-                        }}
-                      >
-                        Book
-                      </button>
-                    </>
-                  )}
                 </div>
               </div>
             </div>
+            {isAuthorized && (
+              <>
+                <BookingForm venueId={id} maxGuests={venueData.maxGuests} />
+              </>
+            )}
           </div>
         </div>
       )}

@@ -10,6 +10,7 @@ const useAuthStore = create((set) => ({
   isVenueManager: false,
   username: getLocalStorageItem('username', ''),
   avatarUrl: getLocalStorageItem('avatar', defaultAvatarUrl),
+  token: getLocalStorageItem('token', ''),
 
   initializeAuth: () => {
     const token = getLocalStorageItem('token', null);
