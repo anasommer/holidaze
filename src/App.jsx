@@ -9,9 +9,10 @@ import VenueItem from './components/venues/VenueItem';
 import NotFound from './components/common/NotFound';
 import { useEffect } from 'react';
 import { UserBookings } from './components/user/UserBookings/UserBookings';
+import CreateVenueForm from './components/manager/CreateVenue/CreateVenueForm';
 
 function App() {
-  const { isAuthorized } = useAuthStore();
+  const { isAuthorized, isVenueManager } = useAuthStore();
   const initializeAuth = useAuthStore((state) => state.initializeAuth);
 
   useEffect(() => {
@@ -32,6 +33,10 @@ function App() {
               <>
                 <Route path='/profile' element={<UserProfile />} />
                 <Route path='/bookings' element={<UserBookings />} />
+
+                {isVenueManager && (
+                  <Route path='/create' element={<CreateVenueForm />} />
+                )}
               </>
             ) : (
               //  Routes for all users
