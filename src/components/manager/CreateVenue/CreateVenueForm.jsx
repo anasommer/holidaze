@@ -5,8 +5,11 @@ import { createVenueSchema } from '../../../utils/schema';
 import useAuthStore from '../../../store/authStore';
 import useCreateVenueStore from '../../../store/createVenueStore';
 import API_URL from '../../../utils/constants';
+import { useNavigate } from 'react-router-dom';
 
 const CreateVenueForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -37,6 +40,7 @@ const CreateVenueForm = () => {
       }
 
       const result = await response.json();
+      navigate(`/venue/${result.id}`);
     } catch (error) {
       console.error('Error making API call:', error);
     }
