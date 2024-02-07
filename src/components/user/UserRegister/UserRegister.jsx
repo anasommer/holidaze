@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import schema from '../../../utils/schema';
+import { schema } from '../../../utils/schema';
 import { registerUser } from '../../../services/api/authService';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';

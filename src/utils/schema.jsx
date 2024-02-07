@@ -24,4 +24,43 @@ const schema = yup.object({
   venueManager: yup.boolean(),
 });
 
-export default schema;
+const createVenueSchema = yup.object().shape({
+  name: yup.string().required('Name is required'),
+  description: yup.string().required('Description is required'),
+  media: yup
+    .array()
+    .nullable()
+    .transform((value) => (isNaN(value) ? [] : value))
+    .optional(),
+  rating: yup
+    .number()
+    .nullable()
+    .transform((value) => (isNaN(value) ? 0 : value))
+    .optional(),
+  price: yup
+    .number()
+    .required('Price is required')
+    .positive('Price must be a positive number'),
+  maxGuests: yup
+    .number()
+    .required('Max Guests is required')
+    .positive('Max Guests must be a positive number'),
+
+  meta: yup.object({
+    wifi: yup.boolean(),
+    parking: yup.boolean(),
+    breakfast: yup.boolean(),
+    pets: yup.boolean(),
+  }),
+  location: yup.object({
+    address: yup.string(),
+    city: yup.string(),
+    zip: yup.string(),
+    country: yup.string(),
+    continent: yup.string(),
+    lat: yup.number().min(-90).max(90),
+    lng: yup.number().min(-180).max(180),
+  }),
+});
+
+export { schema, createVenueSchema };

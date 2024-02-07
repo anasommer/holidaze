@@ -1,5 +1,5 @@
 import useUserStore from '../../store/userStore';
-import schema from '../../utils/schema';
+import { schema } from '../../utils/schema';
 import API_URL from '../../utils/constants';
 
 const updateAvatarUrl = async (newAvatarUrl) => {

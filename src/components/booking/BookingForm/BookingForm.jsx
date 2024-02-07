@@ -63,7 +63,6 @@ const BookingForm = ({ venueId, maxGuests }) => {
         onChange={(e) => setGuests(parseInt(e.target.value, 10))}
         className='mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm w-28 justify-center ml-10 mb-2'
       >
-        {/* Generate options from 1 to maxGuests */}
         {Array.from({ length: maxGuests }, (_, i) => i + 1).map((option) => (
           <option key={option} value={option}>
             {option}

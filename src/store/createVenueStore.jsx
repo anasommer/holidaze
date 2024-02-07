@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const useVenueFormStore = create((set) => ({
+const useCreateVenueStore = create((set) => ({
   formData: {
     name: '',
     description: '',
@@ -15,33 +15,17 @@ const useVenueFormStore = create((set) => ({
       pets: false,
     },
     location: {
-      city: 'Unknown',
-      country: 'Unknown',
+      address: '',
+      city: '',
+      zip: '',
+      country: '',
+      continent: '',
+      lat: 0,
+      lng: 0,
     },
   },
   setFormData: (data) =>
     set((state) => ({ formData: { ...state.formData, ...data } })),
-  resetFormData: () =>
-    set({
-      formData: {
-        name: '',
-        description: '',
-        media: [],
-        price: 0,
-        maxGuests: 0,
-        rating: 0,
-        meta: {
-          wifi: false,
-          parking: false,
-          breakfast: false,
-          pets: false,
-        },
-        location: {
-          city: 'Unknown',
-          country: 'Unknown',
-        },
-      },
-    }),
 }));
 
-export default useVenueFormStore;
+export default useCreateVenueStore;
