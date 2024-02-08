@@ -8,6 +8,7 @@ import UpdateVenueModal from '../UpdateVenue/UpdateVenueModal';
 const VenueManagement = () => {
   const [venues, setVenues] = useState([]);
   const { token, username } = useAuthStore();
+  const [selectedVenueId, setSelectedVenueId] = useState(null);
   const navigate = useNavigate();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -91,8 +92,11 @@ const VenueManagement = () => {
                 </div>
                 <div>
                   <button
-                    onClick={() => setIsUpdateModalOpen(true)}
-                    className='bg-cyan-400 text-black font-bold py-2 mt-4 px-4 rounded hover:bg-green-700 w-full'
+                    className='bg-cyan-500 text-black font-bold py-2 mt-4 px-4 rounded hover:bg-green-700 w-full'
+                    onClick={() => {
+                      setSelectedVenueId(venue.id); // Set the selected venue ID
+                      setIsUpdateModalOpen(true); // Open the modal
+                    }}
                   >
                     Update Venue
                   </button>
@@ -104,11 +108,13 @@ const VenueManagement = () => {
                   </button>
 
                   <UpdateVenueModal
+                    key={selectedVenueId} // Corrected from venueId to selectedVenueId
                     isOpen={isUpdateModalOpen}
                     onClose={() => setIsUpdateModalOpen(false)}
-                    venueId={venue.id}
-                    onUpdated={() => refreshVenues()}
+                    venueId={selectedVenueId} // Pass the correct venueId
+                    onUpdated={refreshVenues}
                   />
+
                   <DeleteVenueModal
                     isOpen={isDeleteModalOpen}
                     onClose={() => setIsDeleteModalOpen(false)}

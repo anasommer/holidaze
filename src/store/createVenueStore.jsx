@@ -25,7 +25,9 @@ const useCreateVenueStore = create((set) => ({
     },
   },
   setFormData: (data) =>
-    set((state) => ({ formData: { ...state.formData, ...data } })),
+    set((state) => ({
+      formData: { ...state.formData, ...data },
+    })),
 }));
 
 export default useCreateVenueStore;

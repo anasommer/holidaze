@@ -30,7 +30,7 @@ const createVenueSchema = yup.object().shape({
   media: yup
     .array()
     .nullable()
-    .transform((value) => (isNaN(value) ? [] : value))
+    .transform((value) => (value ? [] : [value]))
     .optional(),
   rating: yup
     .number()
