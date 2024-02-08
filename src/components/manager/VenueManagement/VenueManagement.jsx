@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react';
 import API_URL from '../../../utils/constants';
 import useAuthStore from '../../../store/authStore';
 import { useNavigate } from 'react-router-dom';
+import DeleteVenueModal from '../CreateVenue/DeleteVenueModal';
+import UpdateVenueModal from '../UpdateVenue/UpdateVenueModal';
 
 const VenueManagement = () => {
   const [venues, setVenues] = useState([]);
   const { token, username } = useAuthStore();
   const navigate = useNavigate();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
-  useEffect(() => {
+  const fetchVenues = () => {
     fetch(`${API_URL}profiles/${username}/venues`, {
       method: 'GET',
       headers: {
@@ -20,7 +24,6 @@ const VenueManagement = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch venues');
         }
-
         return response.json();
       })
       .then((data) => {
@@ -29,24 +32,41 @@ const VenueManagement = () => {
       .catch((error) => {
         console.error('Error fetching venues:', error);
       });
-  }, [token, username]);
+  };
 
+  // Use useEffect to initially load the venues
+  useEffect(() => {
+    fetchVenues();
+  }, [token, username]); // Depend on token and username to refetch when they change
+
+  // Callback for when a venue is successfully deleted or updated
+  const refreshVenues = () => {
+    setIsDeleteModalOpen(false); // Ensure the modal is closed
+    setIsUpdateModalOpen(false); // Close update modal if open
+    fetchVenues(); // Refresh the list of venues
+  };
   return (
-    <div className='container mx-auto mt-5'>
+    <div className='container mx-auto mt-5 '>
       {venues.length === 0 ? (
         <h1 className='text-xl font-medium text-center mb-4 text-red-600 w-[80%] m-auto'>
-          Sorry, you don't own any venues yet.
+          Sorry, you don&apos;t own any venues yet.
         </h1>
       ) : (
         <>
           <h1 className='text-2xl font-semibold mb-5 text-center'>
             Manage Your Venues
           </h1>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 m-auto w-[80%] lg:w-[50%] '>
+          <div
+            className={`m-auto w-[80%] lg:w-[50%] ${
+              venues.length === 1
+                ? 'flex justify-center'
+                : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 md:gap-10'
+            }`}
+          >
             {venues.map((venue) => (
               <div
                 key={venue.id}
-                className='bg-white rounded-lg shadow-md p-4 border border-gray-300'
+                className='bg-white rounded-lg shadow-md p-4 border border-gray-300 mb-5'
               >
                 <h2 className='text-lg font-semibold mb-3'>{venue.name}</h2>
                 <img
@@ -57,7 +77,7 @@ const VenueManagement = () => {
 
                 <div className='flex flex-col justify-center items-center mt-4 space-y-2'>
                   <button
-                    className='bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 w-full mb-3 mt-3'
+                    className='bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 w-full mb-2 mt-3'
                     onClick={() => navigate(`/venues/${venue.id}/bookings`)}
                   >
                     View Bookings
@@ -68,6 +88,33 @@ const VenueManagement = () => {
                   >
                     View Venue
                   </button>
+                </div>
+                <div>
+                  <button
+                    onClick={() => setIsUpdateModalOpen(true)}
+                    className='bg-cyan-400 text-black font-bold py-2 mt-4 px-4 rounded hover:bg-green-700 w-full'
+                  >
+                    Update Venue
+                  </button>
+                  <button
+                    onClick={() => setIsDeleteModalOpen(true)}
+                    className='bg-red-700 text-slate-100 font-bold py-2 mt-4 px-4 rounded hover:bg-green-700 w-full'
+                  >
+                    Delete Venue
+                  </button>
+
+                  <UpdateVenueModal
+                    isOpen={isUpdateModalOpen}
+                    onClose={() => setIsUpdateModalOpen(false)}
+                    venueId={venue.id}
+                    onUpdated={() => refreshVenues()}
+                  />
+                  <DeleteVenueModal
+                    isOpen={isDeleteModalOpen}
+                    onClose={() => setIsDeleteModalOpen(false)}
+                    venueId={venue.id}
+                    onDelete={() => refreshVenues()}
+                  />
                 </div>
               </div>
             ))}

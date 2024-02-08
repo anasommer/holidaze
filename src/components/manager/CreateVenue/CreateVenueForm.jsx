@@ -45,7 +45,7 @@ const CreateVenueForm = () => {
 
       setTimeout(() => {
         navigate(`/venue/${result.id}`);
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.error('Error making API call:', error);
     }
