@@ -10,6 +10,8 @@ import NotFound from './components/common/NotFound';
 import { useEffect } from 'react';
 import { UserBookings } from './components/user/UserBookings/UserBookings';
 import CreateVenueForm from './components/manager/CreateVenue/CreateVenueForm';
+import VenueManagement from './components/manager/VenueManagement/VenueManagement';
+import VenueBookings from './components/manager/VenueBookings/VenueBookings';
 
 function App() {
   const { isAuthorized, isVenueManager } = useAuthStore();
@@ -35,7 +37,17 @@ function App() {
                 <Route path='/bookings' element={<UserBookings />} />
 
                 {isVenueManager && (
-                  <Route path='/create' element={<CreateVenueForm />} />
+                  <>
+                    <Route path='/create' element={<CreateVenueForm />} />
+                    <Route
+                      path='/manage-venues'
+                      element={<VenueManagement />}
+                    />
+                    <Route
+                      path='/venues/:id/bookings'
+                      element={<VenueBookings />}
+                    />
+                  </>
                 )}
               </>
             ) : (
