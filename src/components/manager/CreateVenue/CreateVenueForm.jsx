@@ -208,6 +208,36 @@ const CreateVenueForm = () => {
             </div>
           </div>
         </div>
+        <div className='mb-4 lg:max-w-[80%] m-auto'>
+          <label
+            className='block text-gray-700 text-sm font-bold mb-2'
+            htmlFor='city'
+          >
+            City
+          </label>
+          <input
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id='city'
+            type='text'
+            placeholder='City'
+            {...register('location.city')}
+          />
+        </div>
+        <div className='mb-4 lg:max-w-[80%] m-auto'>
+          <label
+            className='block text-gray-700 text-sm font-bold mb-2'
+            htmlFor='country'
+          >
+            Country
+          </label>
+          <input
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id='country'
+            type='text'
+            placeholder='Country'
+            {...register('location.country')}
+          />
+        </div>
         <div className='flex justify-center mt-4 lg:max-w-[80%] m-auto'>
           <button
             className='w-full bg-amber-400 hover:bg-green-500 hover:text-white text-black font-bold py-2 px-4 rounded'
