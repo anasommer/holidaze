@@ -35,7 +35,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
         });
         if (!response.ok) throw new Error('Failed to fetch venue details');
         const data = await response.json();
-        reset(data); // Reset form with fetched data
+        reset(data);
       } catch (error) {
         console.error('Error:', error);
       } finally {
@@ -49,6 +49,8 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   }, [isOpen, venueId, token, reset]);
 
   const onSubmit = async (data) => {
+    console.log('onSubmit called', data);
+
     try {
       const response = await fetch(`${API_URL}venues/${venueId}`, {
         method: 'PUT',

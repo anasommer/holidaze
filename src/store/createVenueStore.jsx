@@ -4,7 +4,7 @@ const useCreateVenueStore = create((set) => ({
   formData: {
     name: '',
     description: '',
-    media: [],
+    media: 0,
     price: 0,
     maxGuests: 0,
     rating: 0,
