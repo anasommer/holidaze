@@ -1,7 +1,6 @@
 import Modal from '../../../utils/modal';
 import API_URL from '../../../utils/constants';
 import useAuthStore from '../../../store/authStore';
-import PropTypes from 'prop-types';
 
 const DeleteVenueModal = ({ isOpen, onClose, onDelete, venueId }) => {
   const { token } = useAuthStore();
@@ -52,13 +51,6 @@ const DeleteVenueModal = ({ isOpen, onClose, onDelete, venueId }) => {
       </div>
     </Modal>
   );
-};
-
-DeleteVenueModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  venueId: PropTypes.string.isRequired, // or PropTypes.number.isRequired if venueId is a number
 };
 
 export default DeleteVenueModal;

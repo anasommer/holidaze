@@ -5,7 +5,6 @@ import { createVenueSchema } from '../../../utils/schema';
 import useAuthStore from '../../../store/authStore';
 import API_URL from '../../../utils/constants';
 import Modal from '../../../utils/modal';
-import PropTypes from 'prop-types';
 
 const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   const { token } = useAuthStore();
@@ -59,6 +58,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
         },
         body: JSON.stringify(data),
       });
+      console.log('Submitting data:', JSON.stringify(data));
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -136,7 +136,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
             )}
           </div>
 
-          {/* Media Field */}
+          {/* Media Field (Assuming it's a URL input) */}
           <div className='mb-4'>
             <label
               htmlFor='media'
@@ -145,7 +145,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
               Media URL
             </label>
             <input
-              {...register('media')}
+              // {...register('media')}
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               placeholder='Media URL'
             />
@@ -206,17 +206,6 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
       )}
     </Modal>
   );
-};
-
-UpdateVenueModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  venueId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  onUpdated: PropTypes.func,
-};
-
-UpdateVenueModal.defaultProps = {
-  onUpdated: null,
 };
 
 export default UpdateVenueModal;
