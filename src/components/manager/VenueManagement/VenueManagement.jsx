@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import API_URL from '../../../utils/constants';
 import useAuthStore from '../../../store/authStore';
 import { useNavigate } from 'react-router-dom';
-import DeleteVenueModal from '../CreateVenue/DeleteVenueModal';
+import DeleteVenueModal from '../DeleteVenue/DeleteVenueModal';
 import UpdateVenueModal from '../UpdateVenue/UpdateVenueModal';
 
 const VenueManagement = () => {
