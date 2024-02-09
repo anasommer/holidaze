@@ -101,25 +101,28 @@ const VenueManagement = () => {
                     Update Venue
                   </button>
                   <button
-                    onClick={() => setIsDeleteModalOpen(true)}
-                    className='bg-red-700 text-slate-100 font-bold py-2 mt-4 px-4 rounded hover:bg-green-700 w-full'
+                    onClick={() => {
+                      setSelectedVenueId(venue.id); // Set the selected venue ID for deletion
+                      setIsDeleteModalOpen(true);
+                    }}
+                    className='bg-red-700 text-slate-100 font-bold py-2 mt-4 px-4 rounded hover:bg-red-800 w-full'
                   >
                     Delete Venue
                   </button>
 
                   <UpdateVenueModal
-                    key={selectedVenueId} // Corrected from venueId to selectedVenueId
+                    key={selectedVenueId}
                     isOpen={isUpdateModalOpen}
                     onClose={() => setIsUpdateModalOpen(false)}
-                    venueId={selectedVenueId} // Pass the correct venueId
+                    venueId={selectedVenueId}
                     onUpdated={refreshVenues}
                   />
 
                   <DeleteVenueModal
                     isOpen={isDeleteModalOpen}
                     onClose={() => setIsDeleteModalOpen(false)}
-                    venueId={venue.id}
-                    onDelete={() => refreshVenues()}
+                    venueId={selectedVenueId}
+                    onDelete={refreshVenues}
                   />
                 </div>
               </div>
