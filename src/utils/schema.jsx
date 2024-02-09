@@ -62,13 +62,9 @@ const createVenueSchema = yup.object().shape({
     pets: yup.boolean(),
   }),
   location: yup.object({
-    address: yup.string(),
     city: yup.string(),
-    zip: yup.string(),
+
     country: yup.string(),
-    continent: yup.string(),
-    lat: yup.number().min(-90).max(90),
-    lng: yup.number().min(-180).max(180),
   }),
 });
 
