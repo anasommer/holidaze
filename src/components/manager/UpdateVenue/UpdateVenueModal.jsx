@@ -135,21 +135,6 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
             )}
           </div>
 
-          {/* Media Field (Assuming it's a URL input) */}
-          <div className='mb-4'>
-            <label
-              htmlFor='media'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
-              Media URL
-            </label>
-            <input
-              {...register('media')}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              placeholder='Media URL'
-            />
-          </div>
-
           {/* Price Field */}
           <div className='mb-4'>
             <label
@@ -192,6 +177,46 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
             )}
           </div>
 
+          {/* City Field */}
+          <div className='mb-4'>
+            <label
+              htmlFor='city'
+              className='block text-gray-700 text-sm font-bold mb-2'
+            >
+              City
+            </label>
+            <input
+              {...register('location.city')}
+              type='text'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              placeholder='City'
+            />
+            {errors.city && (
+              <p className='text-red-500 text-xs italic'>
+                {errors.location.city.message}
+              </p>
+            )}
+          </div>
+          {/* Country Field */}
+          <div className='mb-4'>
+            <label
+              htmlFor='country'
+              className='block text-gray-700 text-sm font-bold mb-2'
+            >
+              Country
+            </label>
+            <input
+              {...register('location.country')}
+              type='text'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              placeholder='Max Guests'
+            />
+            {errors.country && (
+              <p className='text-red-500 text-xs italic'>
+                {errors.location.country.message}
+              </p>
+            )}
+          </div>
           {/* Submit Button */}
           <div className='flex items-center justify-between'>
             <button
