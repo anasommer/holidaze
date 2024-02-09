@@ -49,8 +49,6 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   }, [isOpen, venueId, token, reset]);
 
   const onSubmit = async (data) => {
-    console.log('onSubmit called', data);
-
     try {
       const response = await fetch(`${API_URL}venues/${venueId}`, {
         method: 'PUT',
@@ -60,7 +58,6 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
         },
         body: JSON.stringify(data),
       });
-      console.log('Submitting data:', JSON.stringify(data));
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -138,7 +135,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
             )}
           </div>
 
-          {/* Media Field (Assuming it's a URL input) */}
+          {/* Media Field */}
           <div className='mb-4'>
             <label
               htmlFor='media'

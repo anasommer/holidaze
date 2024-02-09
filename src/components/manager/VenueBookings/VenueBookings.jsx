@@ -74,9 +74,10 @@ const VenueBookings = () => {
           ))}
         </div>
       ) : (
+        // Message displayed when there are no bookings
         <p className='text-center text-red-800 text-2xl font-bold mt-5 mb-4'>
           There are no bookings yet...
-        </p> // Message displayed when there are no bookings
+        </p>
       )}
     </div>
   );

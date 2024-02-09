@@ -35,16 +35,14 @@ const VenueManagement = () => {
       });
   };
 
-  // Use useEffect to initially load the venues
   useEffect(() => {
     fetchVenues();
-  }, [token, username]); // Depend on token and username to refetch when they change
+  }, [token, username]);
 
-  // Callback for when a venue is successfully deleted or updated
   const refreshVenues = () => {
-    setIsDeleteModalOpen(false); // Ensure the modal is closed
-    setIsUpdateModalOpen(false); // Close update modal if open
-    fetchVenues(); // Refresh the list of venues
+    setIsDeleteModalOpen(false);
+    setIsUpdateModalOpen(false);
+    fetchVenues();
   };
   return (
     <div className='container mx-auto mt-5 '>
@@ -94,15 +92,15 @@ const VenueManagement = () => {
                   <button
                     className='bg-cyan-500 text-black font-bold py-2 mt-4 px-4 rounded hover:bg-green-700 w-full'
                     onClick={() => {
-                      setSelectedVenueId(venue.id); // Set the selected venue ID
-                      setIsUpdateModalOpen(true); // Open the modal
+                      setSelectedVenueId(venue.id);
+                      setIsUpdateModalOpen(true);
                     }}
                   >
                     Update Venue
                   </button>
                   <button
                     onClick={() => {
-                      setSelectedVenueId(venue.id); // Set the selected venue ID for deletion
+                      setSelectedVenueId(venue.id);
                       setIsDeleteModalOpen(true);
                     }}
                     className='bg-red-700 text-slate-100 font-bold py-2 mt-4 px-4 rounded hover:bg-red-800 w-full'

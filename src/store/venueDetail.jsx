@@ -28,7 +28,6 @@ const useVenueDetailStore = create((set) => ({
         generateDateRange(new Date(booking.dateFrom), new Date(booking.dateTo))
       );
 
-      console.log(data);
       set({
         venueData: data,
         loading: false,

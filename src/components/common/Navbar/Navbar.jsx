@@ -108,7 +108,6 @@ const Navbar = () => {
                       >
                         Manage Venues
                       </li>
-                      {/* Additional venue manager links */}
                     </>
                   )}
 
