@@ -12,7 +12,6 @@ const Search = () => {
     debouncedSetSearchQuery(query);
   };
 
-  // Debounce setSearchQuery function
   const debouncedSetSearchQuery = debounce((query) => {
     setSearchQuery(query);
   }, 300);
@@ -24,7 +23,7 @@ const Search = () => {
         placeholder='Search venues...'
         value={searchInput}
         onChange={handleSearchInputChange}
-        className='border border-gray-400 rounded-md px-4 py-2 w-full max-w-md'
+        className='border border-gray-400 px-4 py-2 w-[300px] md:w-[400px] max-w-md rounded-lg'
       />
     </div>
   );
