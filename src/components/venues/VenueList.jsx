@@ -10,8 +10,6 @@ const VenueList = () => {
     nextPage,
     prevPage,
     currentPage,
-    totalPages,
-
     loading,
     error,
   } = useVenuesStore();
@@ -26,13 +24,18 @@ const VenueList = () => {
 
   if (loading)
     return (
-      <h3 className='text-center  text-3xl font-bold'>Loading venues...</h3>
+      <div className='container mx-auto mt-5'>
+        <h3 className='text-center text-3xl font-bold'>Loading venues...</h3>
+      </div>
     );
+
   if (error)
     return (
-      <h3 className='text-center  text-3xl font-bold text-red-700'>
-        Error: Something went wrong, try to refresh the page
-      </h3>
+      <div className='container mx-auto mt-5'>
+        <h3 className='text-center text-3xl font-bold text-red-700'>
+          Error: {error}. Please try refreshing the page.
+        </h3>
+      </div>
     );
 
   return (
@@ -41,20 +44,47 @@ const VenueList = () => {
       <div className='flex justify-center mb-4'>
         <Search />
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-        {displayedVenues.map((venue) => (
-          <VenueCard key={venue.id} venue={venue} />
-        ))}
-      </div>
-      <div className='flex justify-center mt-4'>
-        <button onClick={prevPage} disabled={currentPage === 1}>
-          Previous
-        </button>
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button onClick={nextPage}>Next</button>
-      </div>
+
+      {/* Display loading message if loading */}
+      {loading && (
+        <div className='text-center text-3xl font-bold'>Loading venues...</div>
+      )}
+
+      {/* Display error message if error */}
+      {error && (
+        <div className='text-center text-3xl font-bold text-red-700'>
+          Error: {error} Please try refreshing the page.
+        </div>
+      )}
+
+      {/* Display venue cards if no loading or error */}
+      {!loading && !error && (
+        <>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+            {displayedVenues.map((venue) => (
+              <VenueCard key={venue.id} venue={venue} />
+            ))}
+          </div>
+
+          <div className='flex justify-center mt-4'>
+            {currentPage > 1 && (
+              <button
+                onClick={prevPage}
+                className='mr-4 py-2 px-3 bg-blue-500 hover:bg-amber-400 hover:text-black text-white rounded-lg w-[100px]'
+              >
+                Previous
+              </button>
+            )}
+
+            <button
+              onClick={nextPage}
+              className='py-2 px-3 bg-blue-500 hover:bg-amber-400 hover:text-black text-white rounded-lg w-[100px]'
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

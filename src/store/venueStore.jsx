@@ -33,14 +33,14 @@ const useVenuesStore = create((set) => ({
 
   nextPage: () => {
     set((state) => {
-      window.scrollTo(0, 0); // Scroll to top
+      window.scrollTo(0, 0);
       return { currentPage: state.currentPage + 1 };
     });
   },
 
   prevPage: () => {
     set((state) => {
-      window.scrollTo(0, 0); // Scroll to top
+      window.scrollTo(0, 0);
       return { currentPage: Math.max(1, state.currentPage - 1) };
     });
   },
