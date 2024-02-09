@@ -58,7 +58,6 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
         },
         body: JSON.stringify(data),
       });
-      console.log('Submitting data:', JSON.stringify(data));
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -145,7 +144,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
               Media URL
             </label>
             <input
-              // {...register('media')}
+              {...register('media')}
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               placeholder='Media URL'
             />
