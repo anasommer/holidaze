@@ -9,7 +9,7 @@ import Modal from '../../../utils/modal';
 const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   const { token } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
-  const [originalMedia, setOriginalMedia] = useState(''); // To store the original media URL
+  const [originalMedia, setOriginalMedia] = useState('');
 
   const {
     register,
@@ -33,8 +33,8 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
         });
         if (!response.ok) throw new Error('Failed to fetch venue details');
         const data = await response.json();
-        reset(data); // Reset form with fetched data
-        setOriginalMedia(data.media); // Save the original media URL
+        reset(data);
+        setOriginalMedia(data.media);
       } catch (error) {
         console.error('Error:', error);
       } finally {
@@ -48,8 +48,6 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   }, [isOpen, venueId, token, reset]);
 
   const onSubmit = async (data) => {
-    console.log('Form data on submit:', data);
-    // Check if media has been edited
     if (
       Array.isArray(data.media) &&
       data.media.length > 0 &&
@@ -72,8 +70,8 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      onUpdated(); // Callback to refresh the venue list or data
-      onClose(); // Close the modal
+      onUpdated();
+      onClose();
     } catch (error) {
       console.error('Error updating venue:', error);
     }
@@ -83,8 +81,8 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
     <Modal
       isOpen={isOpen}
       onClose={() => {
-        reset(); // Reset form fields
-        onClose(); // Close modal
+        reset();
+        onClose();
       }}
       showCloseButton={true}
     >
