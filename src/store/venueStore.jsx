@@ -45,6 +45,11 @@ const useVenuesStore = create((set) => ({
     });
   },
 
+  pagination: { currentPage: 1 },
+
+  resetPagination: () =>
+    set((state) => ({ pagination: { ...state.pagination, currentPage: 1 } })),
+
   setSearchQuery: (query) => {
     set((state) => ({
       searchQuery: query,
