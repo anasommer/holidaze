@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const TextInput = ({
   register,
   name,
@@ -39,5 +41,22 @@ const TextInput = ({
     )}
   </div>
 );
+
+TextInput.propTypes = {
+  register: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  errors: PropTypes.object,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  isRequired: PropTypes.bool,
+};
+
+TextInput.defaultProps = {
+  placeholder: '',
+  type: 'text',
+  isRequired: false,
+  errors: {},
+};
 
 export default TextInput;

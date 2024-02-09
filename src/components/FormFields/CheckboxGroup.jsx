@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const CheckboxOption = ({ register, name, label }) => (
   <div className='flex items-center'>
     <input
@@ -25,4 +27,19 @@ const CheckboxGroup = ({ options, register }) => (
   </div>
 );
 
+CheckboxGroup.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  register: PropTypes.func.isRequired,
+};
+
+CheckboxOption.propTypes = {
+  register: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+};
 export default CheckboxGroup;
