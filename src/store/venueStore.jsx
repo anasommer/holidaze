@@ -2,50 +2,55 @@ import { create } from 'zustand';
 import API_URL from '../utils/constants';
 
 const useVenuesStore = create((set) => ({
-  allVenues: [],
+  venues: [],
   currentPage: 1,
   itemsPerPage: 24,
-  totalPages: 0,
   loading: false,
   error: null,
+  searchQuery: '',
 
   fetchAllVenues: async () => {
-    const { currentPage, itemsPerPage } = useVenuesStore.getState(); // Correctly accessing the current state
     set({ loading: true, error: null });
     try {
-      const response = await fetch(
-        `${API_URL}venues?limit=${itemsPerPage}&offset=${
-          (currentPage - 1) * itemsPerPage
-        }`
-      );
-      const totalCount = response.headers.get('X-Total-Count');
-      const totalPages = Math.ceil(totalCount / itemsPerPage);
+      const response = await fetch(`${API_URL}venues`);
       const data = await response.json();
-      set({
-        allVenues: data,
-        totalPages,
-        loading: false,
-      });
+      set({ venues: data, loading: false });
     } catch (error) {
       set({ error: error.message, loading: false });
     }
   },
 
-  setSearchQuery: (query) =>
-    set((state) => {
-      const filteredVenues = query
-        ? state.allVenues.filter((venue) =>
-            venue.name.toLowerCase().includes(query.toLowerCase())
-          )
-        : state.allVenues;
-      return {
-        searchQuery: query,
-        displayedVenues: filteredVenues.slice(0, state.itemsPerPage),
-        currentPage: 1,
-      };
-    }),
+  getDisplayedVenues: () => {
+    const { venues, currentPage, itemsPerPage, searchQuery } =
+      useVenuesStore.getState();
+    const filteredVenues = venues.filter((venue) =>
+      venue.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredVenues.slice(startIndex, endIndex);
+  },
 
-  setCurrentPage: (page) => set({ currentPage: page }),
+  nextPage: () => {
+    set((state) => {
+      window.scrollTo(0, 0); // Scroll to top
+      return { currentPage: state.currentPage + 1 };
+    });
+  },
+
+  prevPage: () => {
+    set((state) => {
+      window.scrollTo(0, 0); // Scroll to top
+      return { currentPage: Math.max(1, state.currentPage - 1) };
+    });
+  },
+
+  setSearchQuery: (query) => {
+    set((state) => ({
+      searchQuery: query,
+      currentPage: 1,
+    }));
+  },
 }));
 
 export default useVenuesStore;

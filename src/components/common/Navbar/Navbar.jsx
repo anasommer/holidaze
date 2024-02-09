@@ -10,7 +10,7 @@ const Navbar = () => {
   const { isAuthorized, isVenueManager } = useAuthStore();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const resetPagination = useVenuesStore((state) => state.resetPagination);
-  const setSearchQuery = useVenuesStore((state) => state.setSearchQuery);
+
   const navigate = useNavigate();
   const logout = useAuthStore((state) => state.logout);
   const avatarUrl = useUserStore((state) => state.avatarUrl);
@@ -30,10 +30,6 @@ const Navbar = () => {
     navigate('/');
   };
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
   return (
     <>
       <nav className='bg-gray-800 text-white font-mono pb-2'>
@@ -46,18 +42,6 @@ const Navbar = () => {
           >
             <span className='font-bold text-xl text-amber-400'>Holidaze</span>
           </Link>
-
-          {/* Search Bar - Hidden on Mobile */}
-          <div className='hidden md:flex items-center space-x-1 flex-1 max-w-md'>
-            <input
-              id='searchBar'
-              name='searchBar'
-              type='text'
-              className='p-2 w-full rounded-lg text-black'
-              placeholder='Search Venues'
-              onChange={handleSearchChange}
-            />
-          </div>
 
           {/* Right Section: User Avatar or Login/Signup */}
           {isAuthorized ? (
