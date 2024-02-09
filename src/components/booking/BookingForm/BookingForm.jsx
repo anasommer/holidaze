@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useVenueDetailStore from '../../../store/venueDetail';
 import useAuthStore from '../../../store/authStore';
-import API_URL from '../../../utils/constants';
+import { createBooking } from '../../../services/api/bookingService';
 
 const BookingForm = ({ venueId, maxGuests }) => {
   const { dateRange } = useVenueDetailStore();
@@ -12,33 +12,20 @@ const BookingForm = ({ venueId, maxGuests }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const bookingUrl = `${API_URL}bookings`;
+    const bookingDetails = {
+      dateFrom: dateRange.startDate,
+      dateTo: dateRange.endDate,
+      guests,
+      venueId,
+    };
 
-    try {
-      const response = await fetch(bookingUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          dateFrom: dateRange.startDate,
-          dateTo: dateRange.endDate,
-          guests,
-          venueId,
-        }),
-      });
+    const { success, message } = await createBooking(token, bookingDetails);
 
-      if (!response.ok) {
-        throw new Error('Booking failed');
-      }
-
-      const result = await response.json();
-
+    if (success) {
       setError(null);
-      setSuccess('Booking successful. Thank you!');
-    } catch (error) {
-      setError('Booking failed, did you choose available dates?');
+      setSuccess(message);
+    } else {
+      setError(message);
     }
   };
 
