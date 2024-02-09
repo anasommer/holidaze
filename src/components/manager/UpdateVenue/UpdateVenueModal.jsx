@@ -5,6 +5,7 @@ import { createVenueSchema } from '../../../utils/schema';
 import useAuthStore from '../../../store/authStore';
 import API_URL from '../../../utils/constants';
 import Modal from '../../../utils/modal';
+import PropTypes from 'prop-types';
 
 const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   const { token } = useAuthStore();
@@ -205,6 +206,17 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
       )}
     </Modal>
   );
+};
+
+UpdateVenueModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  venueId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  onUpdated: PropTypes.func,
+};
+
+UpdateVenueModal.defaultProps = {
+  onUpdated: null,
 };
 
 export default UpdateVenueModal;
