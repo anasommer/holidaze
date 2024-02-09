@@ -49,6 +49,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   }, [isOpen, venueId, token, reset]);
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
       const response = await fetch(`${API_URL}venues/${venueId}`, {
         method: 'PUT',
@@ -209,7 +210,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
               {...register('location.country')}
               type='text'
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              placeholder='Max Guests'
+              placeholder='Country'
             />
             {errors.country && (
               <p className='text-red-500 text-xs italic'>
