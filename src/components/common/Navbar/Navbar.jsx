@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../../../store/authStore';
-import useVenuesStore from '../../../store/venueStore';
+
 import useUserStore from '../../../store/userStore';
 import UserDropdownMenu from './UserDropDownMenu';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isAuthorized, isVenueManager, logout } = useAuthStore();
-  const resetPagination = useVenuesStore((state) => state.resetPagination);
+
   const avatarUrl = useUserStore((state) => state.avatarUrl);
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    resetPagination();
-    navigate('/');
+    window.location.href = '/';
   };
 
   const handleDropdownItemClick = (path) => {
@@ -50,7 +49,7 @@ const Navbar = () => {
             />
             <svg
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className='w-4 h-4 ml-2 cursor-pointer fill-current text-white' // Ensure the fill and text colors match your design
+              className='w-4 h-4 ml-2 cursor-pointer fill-current text-white'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 20 20'
             >
