@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const DropdownMenuItem = ({ onClick, children }) => (
   <li
     onClick={onClick}
@@ -6,5 +8,10 @@ const DropdownMenuItem = ({ onClick, children }) => (
     {children}
   </li>
 );
+
+DropdownMenuItem.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 export default DropdownMenuItem;
