@@ -3,21 +3,27 @@ import API_URL from '../utils/constants';
 
 const useVenuesStore = create((set) => ({
   allVenues: [],
-  displayedVenues: [],
-  searchQuery: '',
   currentPage: 1,
   itemsPerPage: 24,
+  totalPages: 0,
   loading: false,
   error: null,
 
   fetchAllVenues: async () => {
+    const { currentPage, itemsPerPage } = useVenuesStore.getState(); // Correctly accessing the current state
     set({ loading: true, error: null });
     try {
-      const response = await fetch(`${API_URL}venues`);
+      const response = await fetch(
+        `${API_URL}venues?limit=${itemsPerPage}&offset=${
+          (currentPage - 1) * itemsPerPage
+        }`
+      );
+      const totalCount = response.headers.get('X-Total-Count');
+      const totalPages = Math.ceil(totalCount / itemsPerPage);
       const data = await response.json();
       set({
         allVenues: data,
-        displayedVenues: data.slice(0, 24),
+        totalPages,
         loading: false,
       });
     } catch (error) {
@@ -25,7 +31,7 @@ const useVenuesStore = create((set) => ({
     }
   },
 
-  setSearchQuery: (query) => {
+  setSearchQuery: (query) =>
     set((state) => {
       const filteredVenues = query
         ? state.allVenues.filter((venue) =>
@@ -37,22 +43,9 @@ const useVenuesStore = create((set) => ({
         displayedVenues: filteredVenues.slice(0, state.itemsPerPage),
         currentPage: 1,
       };
-    });
-  },
+    }),
 
-  setCurrentPage: (page) => {
-    set((state) => {
-      const startIndex = (page - 1) * state.itemsPerPage;
-      const newDisplayedVenues = state.searchQuery
-        ? state.allVenues
-            .filter((venue) =>
-              venue.name.toLowerCase().includes(state.searchQuery.toLowerCase())
-            )
-            .slice(startIndex, startIndex + state.itemsPerPage)
-        : state.allVenues.slice(startIndex, startIndex + state.itemsPerPage);
-      return { currentPage: page, displayedVenues: newDisplayedVenues };
-    });
-  },
+  setCurrentPage: (page) => set({ currentPage: page }),
 }));
 
 export default useVenuesStore;
