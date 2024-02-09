@@ -9,19 +9,17 @@ import Modal from '../../../utils/modal';
 const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   const { token } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
+  const [originalMedia, setOriginalMedia] = useState(''); // To store the original media URL
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-    setValue,
-    clearErrors,
   } = useForm({
     resolver: yupResolver(createVenueSchema),
   });
 
-  // Fetch venue details and reset form
   useEffect(() => {
     async function fetchVenueDetails() {
       if (!venueId) return;
@@ -35,7 +33,8 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
         });
         if (!response.ok) throw new Error('Failed to fetch venue details');
         const data = await response.json();
-        reset(data);
+        reset(data); // Reset form with fetched data
+        setOriginalMedia(data.media); // Save the original media URL
       } catch (error) {
         console.error('Error:', error);
       } finally {
@@ -49,7 +48,16 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   }, [isOpen, venueId, token, reset]);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log('Form data on submit:', data);
+    // Check if media has been edited
+    if (
+      Array.isArray(data.media) &&
+      data.media.length > 0 &&
+      Array.isArray(data.media[0])
+    ) {
+      data.media = data.media[0];
+    }
+
     try {
       const response = await fetch(`${API_URL}venues/${venueId}`, {
         method: 'PUT',
@@ -64,8 +72,8 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      onUpdated();
-      onClose();
+      onUpdated(); // Callback to refresh the venue list or data
+      onClose(); // Close the modal
     } catch (error) {
       console.error('Error updating venue:', error);
     }
@@ -75,8 +83,8 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
     <Modal
       isOpen={isOpen}
       onClose={() => {
-        reset();
-        onClose();
+        reset(); // Reset form fields
+        onClose(); // Close modal
       }}
       showCloseButton={true}
     >
@@ -84,15 +92,12 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
         <p>Loading...</p>
       ) : (
         <form
-          key={venueId}
           onSubmit={handleSubmit(onSubmit)}
           className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
         >
           <h1 className='text-center mt-4 mb-2 font-bold text-2xl'>
             Update Venue
           </h1>
-
-          {/* Name Field */}
           <div className='mb-4'>
             <label
               htmlFor='name'
@@ -102,9 +107,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
             </label>
             <input
               {...register('name')}
-              className={`shadow appearance-none border ${
-                errors.name ? 'border-red-500' : 'rounded'
-              } w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               placeholder='Venue Name'
             />
             {errors.name && (
@@ -113,8 +116,6 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
               </p>
             )}
           </div>
-
-          {/* Description Field */}
           <div className='mb-4'>
             <label
               htmlFor='description'
@@ -124,9 +125,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
             </label>
             <textarea
               {...register('description')}
-              className={`shadow appearance-none border ${
-                errors.description ? 'border-red-500' : 'rounded'
-              } w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               placeholder='Description'
             />
             {errors.description && (
@@ -135,8 +134,19 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
               </p>
             )}
           </div>
-
-          {/* Price Field */}
+          <div className='mb-4'>
+            <label
+              htmlFor='media'
+              className='block text-gray-700 text-sm font-bold mb-2'
+            >
+              Media URL
+            </label>
+            <input
+              {...register('media')}
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              placeholder='Media URL'
+            />
+          </div>
           <div className='mb-4'>
             <label
               htmlFor='price'
@@ -147,7 +157,7 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
             <input
               {...register('price')}
               type='number'
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               placeholder='Price'
             />
             {errors.price && (
@@ -156,8 +166,6 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
               </p>
             )}
           </div>
-
-          {/* Max Guests Field */}
           <div className='mb-4'>
             <label
               htmlFor='maxGuests'
@@ -177,48 +185,6 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
               </p>
             )}
           </div>
-
-          {/* City Field */}
-          <div className='mb-4'>
-            <label
-              htmlFor='city'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
-              City
-            </label>
-            <input
-              {...register('location.city')}
-              type='text'
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              placeholder='City'
-            />
-            {errors.city && (
-              <p className='text-red-500 text-xs italic'>
-                {errors.location.city.message}
-              </p>
-            )}
-          </div>
-          {/* Country Field */}
-          <div className='mb-4'>
-            <label
-              htmlFor='country'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
-              Country
-            </label>
-            <input
-              {...register('location.country')}
-              type='text'
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              placeholder='Country'
-            />
-            {errors.country && (
-              <p className='text-red-500 text-xs italic'>
-                {errors.location.country.message}
-              </p>
-            )}
-          </div>
-          {/* Submit Button */}
           <div className='flex items-center justify-between'>
             <button
               type='submit'
