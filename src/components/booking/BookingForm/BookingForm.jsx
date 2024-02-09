@@ -1,11 +1,8 @@
-// BookingForm.jsx
 import { useState } from 'react';
-
 import useVenueDetailStore from '../../../store/venueDetail';
 import useAuthStore from '../../../store/authStore';
 import API_URL from '../../../utils/constants';
 
-// eslint-disable-next-line react/prop-types
 const BookingForm = ({ venueId, maxGuests }) => {
   const { dateRange } = useVenueDetailStore();
   const { token } = useAuthStore();
