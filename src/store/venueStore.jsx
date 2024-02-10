@@ -13,6 +13,7 @@ const useVenuesStore = create((set) => ({
     set({ loading: true, error: null });
     try {
       const response = await fetch(`${API_URL}venues`);
+      if (!response.ok) throw new Error('Failed to fetch');
       const data = await response.json();
       set({ venues: data, loading: false });
     } catch (error) {
