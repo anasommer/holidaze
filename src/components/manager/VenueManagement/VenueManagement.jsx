@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import API_URL from '../../../utils/constants';
-import useAuthStore from '../../../store/authStore';
+import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../../../store/authStore';
+import fetchUserVenues from '../../../services/api/venueManager';
 import DeleteVenueModal from '../DeleteVenue/DeleteVenueModal';
 import UpdateVenueModal from '../UpdateVenue/UpdateVenueModal';
 
@@ -13,37 +13,25 @@ const VenueManagement = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
-  const fetchVenues = () => {
-    fetch(`${API_URL}profiles/${username}/venues`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch venues');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setVenues(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching venues:', error);
-      });
-  };
+  const loadVenues = useCallback(async () => {
+    try {
+      const venuesData = await fetchUserVenues(username, token);
+      setVenues(venuesData);
+    } catch (error) {
+      console.error('Error fetching venues:', error);
+    }
+  }, [username, token]);
 
   useEffect(() => {
-    fetchVenues();
-  }, [token, username]);
+    loadVenues();
+  }, [loadVenues]);
 
   const refreshVenues = () => {
     setIsDeleteModalOpen(false);
     setIsUpdateModalOpen(false);
-    fetchVenues();
+    loadVenues();
   };
+
   return (
     <div className='container mx-auto mt-5 '>
       {venues.length === 0 ? (
