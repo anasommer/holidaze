@@ -16,7 +16,7 @@ const VenueCard = ({ venue }) => {
       ) : (
         <img
           className='w-full h-48 object-cover'
-          src='/src/assets/images/venue.jpeg'
+          src='/assets/images/venue.jpeg'
           alt={venue.name}
         />
       )}

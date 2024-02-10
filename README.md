@@ -80,6 +80,7 @@ This is a project for academic evaluation. Contributions are not being accepted 
 ## Contact
 
 - **Anastassia Sommer** - _Initial work_ - [anasommer](https://github.com/anasommer)
+- **Live on Netlify** - https://playful-paletas-69e26c.netlify.app/
 - **Project Link** - https://github.com/anasommer/holidaze
 - **Figma Prototype** - https://www.figma.com/file/0HzbCTkvGqsCPPHjrhS9kG/Project-Exam-2-Style-tile-%26-Prototype?type=design&node-id=0%3A1&mode=design&t=63fJ6X5ye3VT7xiC-1
 
