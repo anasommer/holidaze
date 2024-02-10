@@ -1,24 +1,14 @@
 import Modal from '../../../utils/modal';
-import API_URL from '../../../utils/constants';
 import useAuthStore from '../../../store/authStore';
+
+import deleteVenue from '../../../services/api/deleteVenue';
 
 const DeleteVenueModal = ({ isOpen, onClose, onDelete, venueId }) => {
   const { token } = useAuthStore();
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`${API_URL}venues/${venueId}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to delete the venue');
-      }
-
+      await deleteVenue(venueId, token);
       onDelete();
       onClose();
     } catch (error) {
@@ -29,7 +19,6 @@ const DeleteVenueModal = ({ isOpen, onClose, onDelete, venueId }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className='bg-gray-50 p-6 rounded-lg shadow-lg max-w-sm mx-auto'>
-        {' '}
         <h1 className='text-lg font-semibold mb-4 text-gray-900'>
           Do you want to delete this venue?
         </h1>
