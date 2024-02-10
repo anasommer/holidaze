@@ -1,41 +1,30 @@
 import { useEffect, useState } from 'react';
-import API_URL from '../../../utils/constants';
 import useAuthStore from '../../../store/authStore';
 import VenueInfo from './VenueInfo';
+import fetchUserBookings from '../../../services/api/userBookings';
 
 export const UserBookings = () => {
   const [bookings, setBookings] = useState([]);
   const { token, username } = useAuthStore();
 
   useEffect(() => {
-    fetch(`${API_URL}profiles/${username}/bookings?_venue=true`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-        Username: username,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch bookings');
-        }
-
-        return response.json();
-      })
-      .then((data) => {
+    const loadBookings = async () => {
+      try {
+        const data = await fetchUserBookings(username, token);
         setBookings(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error fetching bookings:', error);
-      });
+      }
+    };
+
+    loadBookings();
   }, [token, username]);
 
   return (
     <div className='container mx-auto mt-5'>
       {bookings.length === 0 ? (
         <h1 className='text-xl font-medium text-center mb-4 text-red-600 w-[80%] m-auto'>
-          Sorry, You don&apos;t have any bookings yet
+          Sorry, you don&apos;t have any bookings yet.
         </h1>
       ) : (
         <>
