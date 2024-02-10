@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import API_URL from '../../../utils/constants';
+import { useParams, useNavigate } from 'react-router-dom';
 import useAuthStore from '../../../store/authStore';
-import { useNavigate } from 'react-router-dom';
+import fetchVenueBookings from '../../../services/api/bookingManager';
 
 const VenueBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -11,28 +10,16 @@ const VenueBookings = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchBookings = async () => {
+    const loadBookings = async () => {
       try {
-        const response = await fetch(`${API_URL}venues/${id}?_bookings=true`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch bookings');
-        }
-
-        const data = await response.json();
-        setBookings(data.bookings);
+        const bookingsData = await fetchVenueBookings(id, token);
+        setBookings(bookingsData);
       } catch (error) {
         console.error('Error fetching bookings:', error);
       }
     };
 
-    fetchBookings();
+    loadBookings();
   }, [id, token]);
 
   return (
@@ -74,7 +61,6 @@ const VenueBookings = () => {
           ))}
         </div>
       ) : (
-        // Message displayed when there are no bookings
         <p className='text-center text-red-800 text-2xl font-bold mt-5 mb-4'>
           There are no bookings yet...
         </p>
