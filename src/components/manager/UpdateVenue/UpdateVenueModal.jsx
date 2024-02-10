@@ -1,9 +1,12 @@
+import {
+  fetchVenueDetails,
+  updateVenue,
+} from '../../../services/api/updateVenue';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createVenueSchema } from '../../../utils/schema';
 import useAuthStore from '../../../store/authStore';
-import API_URL from '../../../utils/constants';
 import Modal from '../../../utils/modal';
 import TextInput from '../../FormFields/TextInput';
 import CheckboxGroup from '../../FormFields/CheckboxGroup';
@@ -11,7 +14,6 @@ import CheckboxGroup from '../../FormFields/CheckboxGroup';
 const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   const { token } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
-  const [originalMedia, setOriginalMedia] = useState('');
 
   const {
     register,
@@ -23,55 +25,25 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   });
 
   useEffect(() => {
-    async function fetchVenueDetails() {
-      if (!venueId) return;
+    const loadVenueDetails = async () => {
+      if (!venueId || !isOpen) return;
       setIsLoading(true);
       try {
-        const response = await fetch(`${API_URL}venues/${venueId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        if (!response.ok) throw new Error('Failed to fetch venue details');
-        const data = await response.json();
+        const data = await fetchVenueDetails(venueId, token);
         reset(data);
-        setOriginalMedia(data.media);
       } catch (error) {
         console.error('Error:', error);
       } finally {
         setIsLoading(false);
       }
-    }
+    };
 
-    if (isOpen) {
-      fetchVenueDetails();
-    }
+    loadVenueDetails();
   }, [isOpen, venueId, token, reset]);
 
   const onSubmit = async (data) => {
-    if (
-      Array.isArray(data.media) &&
-      data.media.length > 0 &&
-      Array.isArray(data.media[0])
-    ) {
-      data.media = data.media[0];
-    }
-
     try {
-      const response = await fetch(`${API_URL}venues/${venueId}`, {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
+      await updateVenue(venueId, data, token);
       onUpdated();
       onClose();
     } catch (error) {
@@ -188,5 +160,4 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
     </Modal>
   );
 };
-
 export default UpdateVenueModal;
