@@ -68,7 +68,7 @@ const VenueItem = () => {
                     selectedImage ||
                     (venueData.media.length > 0
                       ? venueData.media[0]
-                      : '../../../public/assets/images/venue.jpeg')
+                      : '/assets/images/venue.jpeg')
                   }
                   alt={venueData.name}
                   className='w-full h-auto md:h-35 lg:h-15 object-over rounded-md'

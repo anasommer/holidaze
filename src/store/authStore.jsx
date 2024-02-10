@@ -3,7 +3,7 @@ import { create } from 'zustand';
 const getLocalStorageItem = (key, defaultValue) =>
   localStorage.getItem(key) || defaultValue;
 
-const defaultAvatarUrl = '../../public/assets/images/user-avatar.jpeg';
+const defaultAvatarUrl = '/assets/images/user-avatar.jpeg';
 
 const useAuthStore = create((set) => ({
   isAuthorized: false,
