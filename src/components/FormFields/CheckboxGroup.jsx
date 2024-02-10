@@ -11,35 +11,35 @@ const CheckboxOption = ({ register, name, label }) => (
   </div>
 );
 
-const CheckboxGroup = ({ options, register }) => (
-  <div className='mb-4 lg:max-w-[80%] m-auto'>
-    <div className='block text-gray-700 text-sm font-bold mb-2'>Facilities</div>
-    <div className='grid grid-cols-2 gap-4'>
-      {options.map((option, index) => (
-        <CheckboxOption
-          key={index}
-          register={register}
-          name={option.name}
-          label={option.label}
-        />
-      ))}
+const CheckboxGroup = ({ register }) => {
+  const facilitiesOptions = [
+    { name: 'meta.wifi', label: 'Wifi' },
+    { name: 'meta.breakfast', label: 'Breakfast' },
+    { name: 'meta.parking', label: 'Parking' },
+    { name: 'meta.pets', label: 'Pets' },
+  ];
+
+  return (
+    <div className='mb-4 lg:max-w-[80%] m-auto'>
+      <div className='block text-gray-700 text-sm font-bold mb-2'>
+        Facilities
+      </div>
+      <div className='grid grid-cols-2 gap-4'>
+        {facilitiesOptions.map((option, index) => (
+          <CheckboxOption
+            key={index}
+            register={register}
+            name={option.name}
+            label={option.label}
+          />
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 CheckboxGroup.propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
-  ).isRequired,
   register: PropTypes.func.isRequired,
 };
 
-CheckboxOption.propTypes = {
-  register: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-};
 export default CheckboxGroup;

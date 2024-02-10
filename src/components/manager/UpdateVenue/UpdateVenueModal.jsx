@@ -5,6 +5,8 @@ import { createVenueSchema } from '../../../utils/schema';
 import useAuthStore from '../../../store/authStore';
 import API_URL from '../../../utils/constants';
 import Modal from '../../../utils/modal';
+import TextInput from '../../FormFields/TextInput';
+import CheckboxGroup from '../../FormFields/CheckboxGroup';
 
 const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
   const { token } = useAuthStore();
@@ -97,91 +99,81 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
             Update Venue
           </h1>
           <div className='mb-4'>
-            <label
-              htmlFor='name'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
-              Name <span className='text-red-500'>*</span>
-            </label>
-            <input
-              {...register('name')}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            <TextInput
+              isRequired
+              register={register}
+              name='name'
+              label='Name'
+              errors={errors}
               placeholder='Venue Name'
             />
-            {errors.name && (
-              <p className='text-red-500 text-xs italic'>
-                {errors.name.message}
-              </p>
-            )}
-          </div>
-          <div className='mb-4'>
-            <label
-              htmlFor='description'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
-              Description <span className='text-red-500'>*</span>
-            </label>
-            <textarea
-              {...register('description')}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              placeholder='Description'
+            <div className='mb-4 lg:max-w-[80%] m-auto'>
+              <label
+                className='block text-gray-700 text-sm font-bold mb-2'
+                htmlFor='description'
+              >
+                Description <span className='text-red-500'>*</span>
+              </label>
+              <textarea
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.description ? 'border-red-500' : ''
+                }`}
+                id='description'
+                type='text'
+                placeholder='Description'
+                {...register('description')}
+              />
+              {errors.description && (
+                <p className='text-red-500 text-sm italic'>
+                  {errors.description.message}
+                </p>
+              )}
+            </div>
+            <TextInput
+              register={register}
+              name='media'
+              label='Media'
+              errors={errors}
+              placeholder='Url to media'
             />
-            {errors.description && (
-              <p className='text-red-500 text-xs italic'>
-                {errors.description.message}
-              </p>
-            )}
-          </div>
-          <div className='mb-4'>
-            <label
-              htmlFor='media'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
-              Media URL
-            </label>
-            <input
-              {...register('media')}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              placeholder='Media URL'
-            />
-          </div>
-          <div className='mb-4'>
-            <label
-              htmlFor='price'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
-              Price <span className='text-red-500'>*</span>
-            </label>
-            <input
-              {...register('price')}
-              type='number'
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            <TextInput
+              isRequired
+              register={register}
+              name='price'
+              label='Price'
+              errors={errors}
               placeholder='Price'
             />
-            {errors.price && (
-              <p className='text-red-500 text-xs italic'>
-                {errors.price.message}
-              </p>
-            )}
-          </div>
-          <div className='mb-4'>
-            <label
-              htmlFor='maxGuests'
-              className='block text-gray-700 text-sm font-bold mb-2'
-            >
-              Max Guests <span className='text-red-500'>*</span>
-            </label>
-            <input
-              {...register('maxGuests')}
-              type='number'
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              placeholder='Max Guests'
+            <TextInput
+              isRequired
+              register={register}
+              name='maxGuests'
+              label='Max Guests'
+              errors={errors}
+              placeholder='Max Guests number'
             />
-            {errors.maxGuests && (
-              <p className='text-red-500 text-xs italic'>
-                {errors.maxGuests.message}
-              </p>
-            )}
+            <TextInput
+              register={register}
+              name='rating'
+              label='Rating'
+              errors={errors}
+              placeholder='Rating'
+            />
+            <CheckboxGroup register={register} />
+            <TextInput
+              register={register}
+              name='location.city'
+              label='City'
+              errors={errors}
+              placeholder='City'
+            />
+            <TextInput
+              register={register}
+              name='location.country'
+              label='Country'
+              errors={errors}
+              placeholder='Country'
+            />
           </div>
           <div className='flex items-center justify-between'>
             <button

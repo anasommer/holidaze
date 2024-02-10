@@ -46,13 +46,6 @@ const CreateVenueForm = () => {
     );
   }
 
-  const facilitiesOptions = [
-    { name: 'meta.wifi', label: 'Wifi' },
-    { name: 'meta.breakfast', label: 'Breakfast' },
-    { name: 'meta.parking', label: 'Parking' },
-    { name: 'meta.pets', label: 'Pets' },
-  ];
-
   return (
     <div className='md:max-w-[40%] m-auto'>
       <h1 className='text-center mt-4 mb-2 font-bold text-2xl'>Create Venue</h1>
@@ -120,7 +113,7 @@ const CreateVenueForm = () => {
           errors={errors}
           placeholder='Rating'
         />
-        <CheckboxGroup options={facilitiesOptions} register={register} />
+        <CheckboxGroup register={register} />
         <TextInput
           register={register}
           name='location.city'
