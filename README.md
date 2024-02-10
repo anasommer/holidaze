@@ -6,6 +6,10 @@ Welcome to the Holidaze Booking Platform, a comprehensive solution for both trav
 
 Holidaze offers a user-friendly platform where users can explore a wide range of accommodations, make inquiries, and manage bookings. For property managers, Holidaze provides an efficient system to list accommodations, manage bookings, and interact with potential customers.
 
+## Screenshot
+
+![Screenshot of the project](/src/assets/Holidaze.png)
+
 ### Key Features
 
 - **Responsive Design:** Ensures a great user experience across all devices.
