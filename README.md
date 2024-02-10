@@ -8,7 +8,7 @@ Holidaze offers a user-friendly platform where users can explore a wide range of
 
 ## Screenshot
 
-![Screenshot of the project](/src/assets/Holidaze.png)
+![Screenshot of the project](/Holidaze.png)
 
 ### Key Features
 
