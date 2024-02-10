@@ -9,7 +9,7 @@ const VenueInfo = ({ venue }) => {
             src={
               venue.media && venue.media.length > 0
                 ? venue.media
-                : 'src/assets/images/venue.jpeg'
+                : '/src/assets/images/venue.jpeg'
             }
             alt={venue.name}
             className='w-32 h-32 object-cover m-auto'
