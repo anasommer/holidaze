@@ -1,4 +1,6 @@
-const Modal = ({ isOpen, onClose, children, showCloseButton = true }) => {
+import PropTypes from 'prop-types';
+
+const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   const handleOutsideClick = (e) => {
@@ -20,6 +22,13 @@ const Modal = ({ isOpen, onClose, children, showCloseButton = true }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  showCloseButton: PropTypes.bool,
 };
 
 export default Modal;
