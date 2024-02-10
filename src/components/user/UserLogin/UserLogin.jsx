@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import useAuthStore from '../../../store/authStore';
 import { loginApi } from '../../../services/api/authService';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const UserLogin = () => {
   const {
@@ -13,6 +14,7 @@ const UserLogin = () => {
   } = useForm();
   const navigate = useNavigate();
   const { login } = useAuthStore();
+  const [loginError, setLoginError] = useState('');
 
   const onSubmit = async (data) => {
     try {
@@ -29,7 +31,7 @@ const UserLogin = () => {
         navigate('/profile');
       }
     } catch (error) {
-      console.error('Login error:', error);
+      setLoginError('Failed to login, please check your credentials');
     }
   };
 
@@ -63,13 +65,16 @@ const UserLogin = () => {
             Password
           </label>
           <input
-            className='shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-amber-500'
+            className='shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-amber-500'
             id='password'
             type='password'
             placeholder='Password'
             {...register('password')}
           />
         </div>
+        {loginError && (
+          <p className='text-red-500 text-center mb-4'>{loginError}</p>
+        )}
         <div className='flex items-center justify-between'>
           <button className='bg-amber-400 hover:bg-green-500 hover:text-white text-black font-bold py-2 px-4 rounded w-full'>
             Login

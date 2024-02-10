@@ -64,7 +64,7 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-          <div className='hidden md:flex items-center space-x-4'>
+          <div className=' md:flex items-center space-x-4'>
             <Link
               to='/login'
               className='py-2 px-3 bg-green-500 hover:bg-amber-400 hover:text-black rounded-lg'
