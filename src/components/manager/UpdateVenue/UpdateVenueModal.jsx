@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   fetchVenueDetails,
   updateVenue,
@@ -160,4 +161,12 @@ const UpdateVenueModal = ({ isOpen, onClose, venueId, onUpdated }) => {
     </Modal>
   );
 };
+
+UpdateVenueModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  venueId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onUpdated: PropTypes.func.isRequired,
+};
+
 export default UpdateVenueModal;

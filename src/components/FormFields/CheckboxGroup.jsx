@@ -39,7 +39,19 @@ const CheckboxGroup = ({ register }) => {
 };
 
 CheckboxGroup.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ),
   register: PropTypes.func.isRequired,
+};
+
+CheckboxOption.propTypes = {
+  register: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default CheckboxGroup;

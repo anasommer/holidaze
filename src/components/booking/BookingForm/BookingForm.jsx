@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import useVenueDetailStore from '../../../store/venueDetail';
 import useAuthStore from '../../../store/authStore';
@@ -69,6 +70,11 @@ const BookingForm = ({ venueId, maxGuests }) => {
       )}
     </form>
   );
+};
+
+BookingForm.propTypes = {
+  venueId: PropTypes.string.isRequired,
+  maxGuests: PropTypes.number.isRequired,
 };
 
 export default BookingForm;

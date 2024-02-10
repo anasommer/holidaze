@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import Modal from '../../../utils/modal';
 import useAuthStore from '../../../store/authStore';
-
 import deleteVenue from '../../../services/api/deleteVenue';
 
 const DeleteVenueModal = ({ isOpen, onClose, onDelete, venueId }) => {
@@ -39,6 +39,13 @@ const DeleteVenueModal = ({ isOpen, onClose, onDelete, venueId }) => {
       </div>
     </Modal>
   );
+};
+
+DeleteVenueModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  venueId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default DeleteVenueModal;

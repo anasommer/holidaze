@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const VenueInfo = ({ venue }) => {
   return (
     <div className='venue-info'>
@@ -23,6 +25,14 @@ const VenueInfo = ({ venue }) => {
       )}
     </div>
   );
+};
+
+VenueInfo.propTypes = {
+  venue: PropTypes.shape({
+    media: PropTypes.arrayOf(PropTypes.string),
+    name: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }).isRequired,
 };
 
 export default VenueInfo;
