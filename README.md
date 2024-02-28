@@ -1,6 +1,6 @@
 # NorOff Project Exam 2 | Front-End Development 2nd year
 
-[!image](https://anasommer.com/images/projects/holidaze.jpeg)
+![image](https://anasommer.com/images/projects/holidaze.jpeg)
 
 ## Description
 
