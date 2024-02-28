@@ -1,21 +1,24 @@
-# Holidaze Booking Platform
+# NorOff Project Exam 2 | Front-End Development 2nd year
 
-Welcome to the Holidaze Booking Platform, a comprehensive solution for both travelers seeking accommodation and property owners. This project, developed as part of the Noroff - School of technology and digital media curriculum, demonstrates a practical application of React, integrating APIs, and implementing responsive design principles to deliver a seamless booking experience.
+[!image](https://anasommer.com/images/projects/holidaze.jpeg)
 
-## Project Description
+## Description
 
-Holidaze offers a user-friendly platform where users can explore a wide range of accommodations, make inquiries, and manage bookings. For property managers, Holidaze provides an efficient system to list accommodations, manage bookings, and interact with potential customers.
+This is the final exam project at NorOff School of Technology / Front End Development path. The goal of the project was to demonstrate all skills learned during 2 years of studying at NorOff school, including planning, design, and coding skills.
 
-## Screenshot
+The goal was to build: a user-friendly platform where users can explore a wide range of accommodations, make inquiries, and manage bookings. For property managers, Holidaze provides an efficient system to list accommodations, manage bookings, and interact with potential customers.
 
-![Screenshot of the project](/Holidaze.png)
+## Built With
 
-### Key Features
-
-- **Responsive Design:** Ensures a great user experience across all devices.
-- **Dynamic Accommodation Listings:** Users can browse detailed listings complete with photos and information.
-- **Search and Filter:** Enhanced search functionality allows users to find the perfect accommodation based on their preferences.
-- **Admin Dashboard:** A secure backend for accommodation providers to manage their listings and bookings.
+- [Trello](https://trello.com/) - For project planning
+- [Figma](https://figma.com) - Design prototype
+- HTML
+- [Tailwind](https://tailwindcss.com/) - CSS Framework
+- [React.js](https://reactjs.org/) - JS Framework used
+- [Vite](https://vitejs.dev/)
+- [React Router](https://reactrouter.com/en/main)
+- [Yup](https://www.npmjs.com/package/yup) - For schema validation
+- [Zustand](https://github.com/pmndrs/zustand) - State management
 
 ## Getting Started
 
@@ -30,15 +33,15 @@ These instructions will help you set up a copy of the project running on your lo
 npm install npm@latest -g
 ```
 
-### Installation
+### Installing
 
 1. Clone the repo
 
 ```bash
-git clone https://github.com/anasommer/holidaze.git
+git clone git@github.com:anasommer/holidaze.git
 ```
 
-2. Install NPM packages
+2. Install NPM packages/dependencies
 
 ```bash
 cd holidaze
@@ -50,14 +53,6 @@ npm install
 ```bash
 npm start
 ```
-
-## Built With
-
-- **React** - The web framework used
-- **Vite** - Build tool for a faster and leaner development experience
-- **React Router** - For routing
-- **Yup** - For schema validation
-- **Zustand** - State management
 
 ## Development with Vite
 
@@ -79,9 +74,12 @@ This is a project for academic evaluation. Contributions are not being accepted 
 
 ## Contact
 
-- **Anastassia Sommer** - _Initial work_ - [anasommer](https://github.com/anasommer)
-- **Live on Netlify** - https://playful-paletas-69e26c.netlify.app/
-- **Project Link** - https://github.com/anasommer/holidaze
-- **Figma Prototype** - https://www.figma.com/file/0HzbCTkvGqsCPPHjrhS9kG/Project-Exam-2-Style-tile-%26-Prototype?type=design&node-id=0%3A1&mode=design&t=63fJ6X5ye3VT7xiC-1
+[My Portolio Page](https://www.anasommer.com/)
+
+[My LinkedIn Page](https://www.linkedin.com/in/anastassia-sommer-146409235/)
+
+[Live on Netlify](https://playful-paletas-69e26c.netlify.app/)
+
+[Figma Prototype](https://www.figma.com/file/0HzbCTkvGqsCPPHjrhS9kG/Project-Exam-2-Style-tile-%26-Prototype?type=design&node-id=0%3A1&mode=design&t=63fJ6X5ye3VT7xiC-1)
 
 For any additional questions or comments, feel free to reach out.
